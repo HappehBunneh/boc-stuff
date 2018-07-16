@@ -1,11 +1,15 @@
 const CanvasJS =  require('./canvasjs.min')
 var a = 0;
+var currentData = [];
 var voltageData = [];
 var tempData = [];
 var powerData = [];
+var currentChart;
+var voltageChart;
+var powerChart;
+var tempChart;
 window.onload = function () {
-    var currentData = []; // dataPoints
-    var currentChart = new CanvasJS.Chart("currentGraph", {
+    currentChart = new CanvasJS.Chart("currentGraph", {
         title :{
             text: "Current"
         },
@@ -17,7 +21,7 @@ window.onload = function () {
             dataPoints: currentData
         }]
     });
-    var voltageChart = new CanvasJS.Chart("voltageGraph", {
+    voltageChart = new CanvasJS.Chart("voltageGraph", {
         title :{
             text: "Voltage"
         },
@@ -29,7 +33,7 @@ window.onload = function () {
             dataPoints: voltageData
         }]
     });
-    var powerChart = new CanvasJS.Chart("powerGraph", {
+    powerChart = new CanvasJS.Chart("powerGraph", {
         title :{
             text: "Power"
         },
@@ -41,7 +45,7 @@ window.onload = function () {
             dataPoints: powerData
         }]
     });
-    var tempChart = new CanvasJS.Chart("tempGraph", {
+    tempChart = new CanvasJS.Chart("tempGraph", {
         title :{
             text: "Temp"
         },
@@ -78,25 +82,36 @@ window.onload = function () {
 }
 function reply_click(clicked_id)
 {
+    console.log(powerChart);
     if (clicked_id == 'current') {
         document.getElementById('currentGraph').style.display = 'block';
+        currentChart.render();
         document.getElementById('voltageGraph').style.display = 'none';
         document.getElementById('tempGraph').style.display = 'none';
         document.getElementById('powerGraph').style.display = 'none';
     } else if (clicked_id == 'voltage') {
         document.getElementById('currentGraph').style.display = 'none';
         document.getElementById('voltageGraph').style.display = 'block';
+        voltageChart.render();
         document.getElementById('tempGraph').style.display = 'none';
         document.getElementById('powerGraph').style.display = 'none';
     } else if (clicked_id == 'temp') {
         document.getElementById('currentGraph').style.display = 'none';
         document.getElementById('voltageGraph').style.display = 'none';
         document.getElementById('tempGraph').style.display = 'block';
+        tempChart.render();
         document.getElementById('powerGraph').style.display = 'none';
     } else if (clicked_id == 'power') {
         document.getElementById('currentGraph').style.display = 'none';
         document.getElementById('voltageGraph').style.display = 'none';
         document.getElementById('tempGraph').style.display = 'none';
         document.getElementById('powerGraph').style.display = 'block';
+        powerChart.render();
+    } else if (clicked_id == 'clear') {
+        currentData = [];
+        voltageData = [];
+        tempData = [];
+        powerData = [];
+        console.log(currentData);
     }
 }
