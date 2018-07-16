@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column;
+}
+
+.outputHolder {
+    padding: 4px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.usefulbuttonHolder {
+    padding: 4px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.graphbuttonHolder {
+    padding: 4px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#graph {
+    height:300px;
+    width: 100%;
+}
+
+#voltageGraph {
+    display: none;
+    width: 100%;
+}
+
+#currentGraph {
+    display: none;
+    width: 100%;
+}
+
+#tempGraph {
+    display: none;
+    width: 100%;
+}
+
+#powerGraph {
+    display: none;
+    width: 100%;
+}
