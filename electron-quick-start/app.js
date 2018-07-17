@@ -88,7 +88,6 @@ window.onload = function () {
         tempChart.render();
         powerChart.render();
     };
-    
     updateChart(currentData.length);
     setInterval(function(){updateChart()}, updateInterval);   
 }

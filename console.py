@@ -98,7 +98,10 @@ if __name__ == '__main__':
         f.write('\n')
         f.write(','.join(a.dataVariables) + '\n')
     while True:
-        data = a.getRawData()
-        if data[0]:
-            a.storeData(data)
-        a.displayData()
+        try:
+            data = a.getRawData()
+            if data[0]:
+                a.storeData(data)
+            a.displayData()
+        except SystemExit:
+            print 'i got ripped and im sad :('
