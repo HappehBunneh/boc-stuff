@@ -79,7 +79,7 @@ window.onload = function () {
             currentData.push({x: xVal,y: parseInt(bufferData.STACK_I.replace('A', ""))});
             voltageData.push({x: xVal,y: parseInt(bufferData.STACK_V.replace('A', ""))});
             powerData.push({x: xVal,y: parseInt(bufferData.STACK_I.replace('A', ""))*parseInt(bufferData.STACK_V.replace('A', ""))});
-            tempData.push({x: xVal,y: parseInt(bufferData.STACK_T.replace('C', ""))});
+            tempData.push({x: xVal,y: parseInt(bufferData.STACK_TEMP.replace('C', ""))});
             yVal++;
             xVal++;
         }
