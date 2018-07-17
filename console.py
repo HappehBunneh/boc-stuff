@@ -30,9 +30,7 @@ class Console():
                     return [' '.join(comments), False]
                 else:
                     return [False]
-            else:
-                return [False]
-
+                    
     def storeData(self, data):
         toWriteToFile = ''
         toWriteToBuffer = ''
