@@ -68,7 +68,7 @@ window.onload = function () {
     });
 
     readData = function (fileLocation) {
-        console.log(fileLocation, bufferData)
+        bufferData = JSON.parse(fs.readFileSync('../buffer.txt', 'utf8').replace(/'/g , '"'));
     }    
 
     updateChart = function (count) {
