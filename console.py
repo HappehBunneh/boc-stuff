@@ -55,7 +55,9 @@ class Console():
             with open(self.fileLocation, 'a') as f:
                 f.write(toWriteToFile)
 
-    def displayData(self):
+    def displayData(self, dataVariables=None):
+        if dataVariables == None:
+            dataVariables = self.dataVariables
         with open(self.bufferLocation, 'r') as buffer:
             try:
                 data = eval(buffer.read())
@@ -64,7 +66,7 @@ class Console():
         if type(data) == dict:
             os.system('clear')
             a = ''
-            b = [i for i in self.dataVariables if 'IGNORE' not in i]
+            b = [i for i in dataVariables if 'IGNORE' not in i]
             for i in range(len(b)):
                 if i % 4 == 0 and i != 0:
                     a += b[i] + '\t\t' + data[b[i]] + '\t\t'
