@@ -63,7 +63,7 @@ class Console():
             try:
                 data = eval(buffer.read())
             except Exception:
-                data  = ''
+                data = ''
         if type(data) == dict:
             os.system('clear')
             a = ''
@@ -107,9 +107,10 @@ if __name__ == '__main__':
     while True:
         try:
             data = a.getRawData()
+            print data
             if data[0]:
                 a.storeData(data)
-            a.displayData()
+            #a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.compress()
             exit()
