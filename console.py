@@ -15,12 +15,10 @@ class Console():
 
     def getRawData(self):
         raw_data = self.serial.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
-        print raw_data
         if raw_data == '':
             return [False]
         else:
-            raw_data = raw_data.split(' ')
-            print len(raw_data), len(self.dataVariables)
+            raw_data = [i for i in raw_data.split(' ') if i != '']
             if len(raw_data) == len(self.dataVariables):
                 return [dict(zip(self.dataVariables, raw_data))]
             else:
