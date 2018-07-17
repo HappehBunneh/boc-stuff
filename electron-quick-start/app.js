@@ -1,4 +1,8 @@
-const CanvasJS =  require('./canvasjs.min')
+const CanvasJS =  require('./canvasjs.min');
+const fs = require('fs');
+var bufferData = JSON.parse(fs.readFileSync('../buffer.txt', 'utf8').replace(/'/g , '"'));
+var read = require('read-yaml');
+var config = read.sync('../config.yaml');
 var a = 0;
 var currentData = [];
 var voltageData = [];
@@ -8,6 +12,11 @@ var currentChart;
 var voltageChart;
 var powerChart;
 var tempChart;
+var updateChart;
+var xVal = 0;
+var yVal = 0; 
+var updateInterval = 1000;
+
 window.onload = function () {
     currentChart = new CanvasJS.Chart("currentGraph", {
         title :{
@@ -57,18 +66,20 @@ window.onload = function () {
             dataPoints: tempData
         }]
     });
-    var xVal = 0;
-    var yVal = 0; 
-    var updateInterval = 1000;
-    var updateChart = function (count) {
+
+    readData = function (fileLocation) {
+        console.log(fileLocation, bufferData)
+    }    
+
+    updateChart = function (count) {
         a = a+1
-        document.getElementById('output').textContent = a;
+        document.getElementById('output').textContent = JSON.stringify(bufferData, null, 2);
         count = count || 1;
         for (var j = 0; j < count; j++) {
-            currentData.push({x: xVal,y: yVal});
-            voltageData.push({x: xVal,y: yVal*2});
-            powerData.push({x: xVal,y: yVal*yVal});
-            tempData.push({x: xVal,y: yVal*-1});
+            currentData.push({x: xVal,y: parseInt(bufferData.SI.replace('A', ""))});
+            voltageData.push({x: xVal,y: parseInt(bufferData.SV.replace('A', ""))});
+            powerData.push({x: xVal,y: parseInt(bufferData.SI.replace('A', ""))*parseInt(bufferData.SV.replace('A', ""))});
+            tempData.push({x: xVal,y: parseInt(bufferData.ST.replace('C', ""))});
             yVal++;
             xVal++;
         }
@@ -77,12 +88,14 @@ window.onload = function () {
         tempChart.render();
         powerChart.render();
     };
+    readData(config['buffer']);
     updateChart(currentData.length);
     setInterval(function(){updateChart()}, updateInterval);   
 }
+
+
 function reply_click(clicked_id)
 {
-    console.log(powerChart);
     if (clicked_id == 'current') {
         document.getElementById('currentGraph').style.display = 'block';
         currentChart.render();
@@ -112,6 +125,6 @@ function reply_click(clicked_id)
         voltageData = [];
         tempData = [];
         powerData = [];
-        console.log(currentData);
+        updateChart();
     }
 }
