@@ -2,7 +2,7 @@ import yaml
 import os
 import sys
 import serial
-from zipfile import ZipFile
+import gzip
 
 class Console():
     def __init__(self):
@@ -77,8 +77,8 @@ class Console():
             sys.stdout.flush()
 
     def compress(self):
-        with ZipFile('my_python_files.zip','w') as zip:
-            zip.write(self.fileLocation)
+        data = open(self.fileLocation).read()
+        gzip.open(self.fileLocation + '.gz', 'wb').write(data).close()
 
 if __name__ == '__main__':
     a = Console()
