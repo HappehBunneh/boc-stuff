@@ -19,18 +19,18 @@ class Console():
         else:
             raw_data = raw_data.split(' ')
             if len(raw_data) == len(self.dataVariables):
-                return [dict(zip(self.dataVariables), raw_data)]
+                return [dict(zip(self.dataVariables, raw_data))]
             else:
                 if len(raw_data) > len(self.dataVariables):
                     comments = raw_data[:-len(self.dataVariables)]
                     data = raw_data[len(self.dataVariables):]
-                    return [' '.join(comments), dict(zip(self.dataVariables, raw_data))]
+                    return [' '.join(comments), dict(zip(self.dataVariables, data))]
                 elif len(raw_data) < len(self.dataVariables):
                     comments = raw_data
                     return [' '.join(comments), False]
                 else:
                     return [False]
-                    
+
     def storeData(self, data):
         toWriteToFile = ''
         toWriteToBuffer = ''
@@ -93,8 +93,6 @@ if __name__ == '__main__':
         f.write(','.join(a.dataVariables) + '\n')
     while True:
         data = a.getRawData()
-        if data[0]:
+        if data[0] and len(data) == 0:
             a.storeData(data)
-        else:
-            a.storeData(data, comments)
         a.displayData()
