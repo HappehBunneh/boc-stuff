@@ -20,6 +20,7 @@ class Console():
             return [False]
         else:
             raw_data = raw_data.split(' ')
+            print len(raw_data), len(self.dataVariables)
             if len(raw_data) == len(self.dataVariables):
                 return [dict(zip(self.dataVariables, raw_data))]
             else:
