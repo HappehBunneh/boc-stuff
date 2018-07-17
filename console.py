@@ -103,5 +103,5 @@ if __name__ == '__main__':
             if data[0]:
                 a.storeData(data)
             a.displayData()
-        except SystemExit, KeyboardInterrupt:
+        except (KeyboardInterrupt, SystemExit):
             print 'i got ripped and im sad :('
