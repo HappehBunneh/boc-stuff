@@ -10,10 +10,12 @@ class Console():
             self.dataVariables =  config['dataVariables']
             self.port = config['port']
             self.bufferLocation = config['buffer']
+            self.fileLocation = config['fileLocation']
         self.serial = serial.Serial(port=self.port)    
 
     def getRawData(self):
         raw_data = self.serial.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
+        print raw_data
         if raw_data == '':
             return [False]
         else:
