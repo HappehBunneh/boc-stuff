@@ -97,7 +97,6 @@ if __name__ == '__main__':
         f.write(','.join(a.dataVariables) + '\n')
     while True:
         data = a.getRawData()
-        print data
-        if data[0] and len(data) == 0:
+        if data[0]:
             a.storeData(data)
         a.displayData()
