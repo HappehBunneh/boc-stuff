@@ -111,7 +111,7 @@ if __name__ == '__main__':
         f.write('Test_Reason' + ',' + testReason + '\n')
         f.write('\n')
         f.write(','.join(a.dataVariables) + '\n')
-    b = sendemail.Mail(a.emailusr, a.emailpwd, a.recipients, a.fileLocation)
+    b = sendemail.Mail(a.email, a.pwd, a.recipients, a.fileLocation + '.gz')
     while True:
         try:
             data = a.getRawData()
