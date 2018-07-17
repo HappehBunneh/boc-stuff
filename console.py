@@ -3,6 +3,7 @@ import os
 import sys
 import serial
 import gzip
+import sendemail
 
 class Console():
     def __init__(self):
@@ -12,6 +13,9 @@ class Console():
             self.port = config['port']
             self.bufferLocation = config['buffer']
             self.dirLocation = config['test_directory']
+            self.recipients = config['recipients']
+            self.email = config['emailusr']
+            self.pwd = config['emailpwd']
         self.serial = serial.Serial(port=self.port)    
 
     def getRawData(self):
@@ -107,6 +111,7 @@ if __name__ == '__main__':
         f.write('Test_Reason' + ',' + testReason + '\n')
         f.write('\n')
         f.write(','.join(a.dataVariables) + '\n')
+    b = sendemail.Mail(a.emailusr, a.emailpwd, a.recipients, a.fileLocation)
     while True:
         try:
             data = a.getRawData()
@@ -116,4 +121,5 @@ if __name__ == '__main__':
             #a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.compress()
+            b.sendMail()
             exit()
