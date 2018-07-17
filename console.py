@@ -81,7 +81,7 @@ if __name__ == '__main__':
     serialNumber = raw_input('\nSpecify serial number : ')
     testReason = raw_input('\nPurpose of test : ')
     while True:
-        a.fileLocation = a.test_directory '+raw_input('\nSpecify filename : ') + '.csv'
+        a.fileLocation = a.dirLocation +raw_input('\nSpecify filename : ') + '.csv'
         if os.path.exists(a.fileLocation):
             if raw_input('\nAlready exists, would you like to overwrite this... (Y/N) ? ').lower() == 'y':
                 os.remove(a.fileLocation)
