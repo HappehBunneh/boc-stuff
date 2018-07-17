@@ -69,10 +69,11 @@ window.onload = function () {
 
     readData = function (fileLocation) {
         bufferData = JSON.parse(fs.readFileSync('../buffer.txt', 'utf8').replace(/'/g , '"'));
+        console.log(bufferData, 'read')
     }    
 
     updateChart = function (count) {
-        a = a+1
+        console.log(bufferData, 'update')
         document.getElementById('output').textContent = JSON.stringify(bufferData, null, 2);
         count = count || 1;
         for (var j = 0; j < count; j++) {
