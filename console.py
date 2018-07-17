@@ -78,7 +78,9 @@ class Console():
 
     def compress(self):
         data = open(self.fileLocation).read()
-        gzip.open(self.fileLocation + '.gz', 'wb').write(data).close()
+        output = gzip.open(self.fileLocation + '.gz', 'wb')
+        output.write(data)
+        output.close()
 
 if __name__ == '__main__':
     a = Console()
