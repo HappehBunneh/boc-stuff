@@ -45,3 +45,9 @@ dataVariables:
 port: /dev/ttyUSB0
 buffer: buffer.txt
 test_directory: test_dir
+recipients: 
+  - maxjay2000@gmail.com
+  - stewart.dow@boc.com
+emailusr: boc.hymera.sys@gmail.com
+emailpwd: Tango1234
+
