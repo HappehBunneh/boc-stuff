@@ -27,7 +27,7 @@ class Console():
                     print '====================', '\n'
                     print raw_data
                     comments = raw_data[:-len(self.dataVariables)]
-                    data = raw_data[len(self.dataVariables):]
+                    data = raw_data[len(raw_data)-len(self.dataVariables):]
                     print '\n\n', comments, data, '\n\n'
                     return [' '.join(comments), dict(zip(self.dataVariables, data))]
                 elif len(raw_data) < len(self.dataVariables):
