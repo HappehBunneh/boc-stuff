@@ -76,10 +76,10 @@ window.onload = function () {
         document.getElementById('output').textContent = JSON.stringify(bufferData, null, 2);
         count = count || 1;
         for (var j = 0; j < count; j++) {
-            currentData.push({x: xVal,y: parseInt(bufferData.SI.replace('A', ""))});
-            voltageData.push({x: xVal,y: parseInt(bufferData.SV.replace('A', ""))});
-            powerData.push({x: xVal,y: parseInt(bufferData.SI.replace('A', ""))*parseInt(bufferData.SV.replace('A', ""))});
-            tempData.push({x: xVal,y: parseInt(bufferData.ST.replace('C', ""))});
+            currentData.push({x: xVal,y: parseInt(bufferData.STACK_I.replace('A', ""))});
+            voltageData.push({x: xVal,y: parseInt(bufferData.STACK_V.replace('A', ""))});
+            powerData.push({x: xVal,y: parseInt(bufferData.STACK_I.replace('A', ""))*parseInt(bufferData.STACK_V.replace('A', ""))});
+            tempData.push({x: xVal,y: parseInt(bufferData.STACK_T.replace('C', ""))});
             yVal++;
             xVal++;
         }
