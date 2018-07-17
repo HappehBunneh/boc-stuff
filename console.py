@@ -2,7 +2,7 @@ import yaml
 import os
 import sys
 import serial
-import zlib, base64
+from zipfile import ZipFile
 
 class Console():
     def __init__(self):
@@ -77,14 +77,8 @@ class Console():
             sys.stdout.flush()
 
     def compress(self):
-        file = open(self.fileLocation,'r')
-        text = file.read()
-        file.close()
-        code = base64.b64encode(zlib.compress(text.encode('utf-8'),9))
-        code = code.decode('utf-8')
-        f=open('compressed' + self.fileLocation,'w')
-        f.write(code)
-        f.close()
+        with ZipFile('my_python_files.zip','w') as zip:
+            zip.write(self.fileLocation)
 
 if __name__ == '__main__':
     a = Console()
