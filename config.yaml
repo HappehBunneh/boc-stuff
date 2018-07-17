@@ -31,7 +31,7 @@ dataVariables:
   - IGNORE_4
   - IGNORE_5
   - FIRMWARE
-  - INGORE_6
+  - IGNORE_6
   - MAX_P_W
   - POWER_1_W
   - POWER_2_W
