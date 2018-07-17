@@ -44,4 +44,4 @@ dataVariables:
   - TIME
 port: /dev/ttyUSB0
 buffer: buffer.txt
-fileLocation: False
+test_directory: test_dir

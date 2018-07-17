@@ -10,7 +10,7 @@ class Console():
             self.dataVariables =  config['dataVariables']
             self.port = config['port']
             self.bufferLocation = config['buffer']
-            self.fileLocation = config['fileLocation']
+            self.dirLocation = config['test_directory']
         self.serial = serial.Serial(port=self.port)    
 
     def getRawData(self):
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     serialNumber = raw_input('\nSpecify serial number : ')
     testReason = raw_input('\nPurpose of test : ')
     while True:
-        a.fileLocation = raw_input('\nSpecify filename : ') + '.csv'
+        a.fileLocation = a.test_directory '+raw_input('\nSpecify filename : ') + '.csv'
         if os.path.exists(a.fileLocation):
             if raw_input('\nAlready exists, would you like to overwrite this... (Y/N) ? ').lower() == 'y':
                 os.remove(a.fileLocation)
@@ -104,4 +104,5 @@ if __name__ == '__main__':
                 a.storeData(data)
             a.displayData()
         except (KeyboardInterrupt, SystemExit):
-            print 'i got ripped and im sad :('
+            print 'bahbye'
+            exit()
