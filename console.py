@@ -24,7 +24,7 @@ class Console():
                 if len(raw_data) > len(self.dataVariables):
                     comments = raw_data[:-len(self.dataVariables)]
                     data = raw_data[len(self.dataVariables):]
-                    return [' '.join(comments), dict(zip(self.dataVariables, raw_data)))]
+                    return [' '.join(comments), dict(zip(self.dataVariables, raw_data))]
                 elif len(raw_data) < len(self.dataVariables):
                     comments = raw_data
                     return [' '.join(comments), False]
