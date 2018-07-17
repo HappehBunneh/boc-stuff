@@ -56,7 +56,10 @@ class Console():
 
     def displayData(self):
         with open(self.bufferLocation, 'r') as buffer:
-            data = eval(buffer.read())
+            try:
+                data = eval(buffer.read())
+            except Exception:
+                data  = ''
         if type(data) == dict:
             os.system('clear')
             a = ''
