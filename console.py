@@ -24,6 +24,8 @@ class Console():
                 return [dict(zip(self.dataVariables, raw_data))]
             else:
                 if len(raw_data) > len(self.dataVariables):
+                    print '====================', '\n'
+                    print raw_data
                     comments = raw_data[:-len(self.dataVariables)]
                     data = raw_data[len(self.dataVariables):]
                     print '\n\n', comments, data, '\n\n'
