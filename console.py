@@ -2,6 +2,7 @@ import yaml
 import os
 import sys
 import serial
+import zlib, base64
 
 class Console():
     def __init__(self):
@@ -75,6 +76,16 @@ class Console():
             sys.stdout.write(a)
             sys.stdout.flush()
 
+    def compress(self):
+        file = open(self.fileLocation,'r')
+        text = file.read()
+        file.close()
+        code = base64.b64encode(zlib.compress(text.encode('utf-8'),9))
+        code = code.decode('utf-8')
+        f=open('compressed' + self.fileLocation,'w')
+        f.write(code)
+        f.close()
+
 if __name__ == '__main__':
     a = Console()
     modelType = raw_input('\nSpecify model type : ')
@@ -104,5 +115,5 @@ if __name__ == '__main__':
                 a.storeData(data)
             a.displayData()
         except (KeyboardInterrupt, SystemExit):
-            print 'bahbye'
+            a.compress()
             exit()
