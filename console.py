@@ -64,9 +64,9 @@ class Console():
                 f.write(toWriteToFile)
 
     def displayData(self, dataVariables=None):
-        
         if dataVariables == None:
             dataVariables = self.dataVariables
+        self.maxprint.dataVariables = dataVariables
         with open(self.bufferLocation, 'r') as buffer:
             try:
                 data = eval(buffer.read())
