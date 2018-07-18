@@ -4,6 +4,7 @@ import sys
 import serial
 import gzip
 import sendemail
+import maxprint
 
 class Console():
     def __init__(self):
@@ -16,6 +17,8 @@ class Console():
             self.recipients = config['recipients']
             self.email = config['emailusr']
             self.pwd = config['emailpwd']
+        self.data = {}
+        self.maxprint = maxprint.Print(self.data, self.dataVariables)
         self.serial = serial.Serial(port=self.port)    
 
     def getRawData(self):
@@ -28,11 +31,8 @@ class Console():
                 return [dict(zip(self.dataVariables, raw_data))]
             else:
                 if len(raw_data) > len(self.dataVariables):
-                    print '====================', '\n'
-                    print raw_data
                     comments = raw_data[:-len(self.dataVariables)]
                     data = raw_data[len(raw_data)-len(self.dataVariables):]
-                    print '\n\n', comments, data, '\n\n'
                     return [' '.join(comments), dict(zip(self.dataVariables, data))]
                 elif len(raw_data) < len(self.dataVariables):
                     comments = raw_data
@@ -64,6 +64,7 @@ class Console():
                 f.write(toWriteToFile)
 
     def displayData(self, dataVariables=None):
+        
         if dataVariables == None:
             dataVariables = self.dataVariables
         with open(self.bufferLocation, 'r') as buffer:
@@ -72,14 +73,9 @@ class Console():
             except Exception:
                 data = ''
         if type(data) == dict:
+            self.maxprint.data = data
             os.system('clear')
-            a = ''
-            b = [i for i in dataVariables if 'IGNORE' not in i]
-            for i in range(len(b)):
-                if i % 4 == 0 and i != 0:
-                    a += b[i] + '\t\t' + data[b[i]] + '\t\t'
-                else:
-                    a += '\n' + b[i] + '\t\t' + data[b[i]] + '\t\t'
+            a = self.maxprint._print()
             sys.stdout.write(a)
             sys.stdout.flush()
 
@@ -115,10 +111,9 @@ if __name__ == '__main__':
     while True:
         try:
             data = a.getRawData()
-            print data
             if data[0]:
                 a.storeData(data)
-            #a.displayData()
+            a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.compress()
             b.sendMail()
