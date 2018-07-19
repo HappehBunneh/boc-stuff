@@ -31,7 +31,8 @@ class Print():
     def _print(self):
         self.width = self.getTerminalSize()
         self.lenData = self.getLongestLength()
-        self.lenStep = self.getLongestLength()*2+9+16
+        self.lenTab = len('\t'.expandtabs())
+        self.lenStep = self.getLongestLength()*2+1+3*self.lenTab
         self.fit = self.width//self.lenStep
         self.text = ''
         b = 1
