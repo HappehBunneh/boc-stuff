@@ -43,7 +43,7 @@ class Print():
                c += ' '
             while len(d) < self.lenData:
                d += ' '
-            if b > 3:
+            if b > self.fit:
                 self.text += '\n' + c + ':\t' + d + '\t\t' 
                 b = 1
             else:
