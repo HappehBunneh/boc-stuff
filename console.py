@@ -55,7 +55,7 @@ class Console():
                 data = data[0]
                 toWriteToFile = '\n' + ','.join([data[i] for i in self.dataVariables])
                 data['TIME_ELAPSED'] = self.time_elapsed
-                data['POWER'] = str(float(data['OUTPUT_1_I'].replace('V', '')) * float(data['OUTPUT_2_V'].replace('A', '')))
+                data['POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
                 toWriteToBuffer = str(data)
         else:
             if data[1]:
@@ -126,7 +126,7 @@ if __name__ == '__main__':
         try:
             a.currentTime = datetime.now()
             t_diff = relativedelta(a.currentTime, a.startTime)
-            a.time_elapsed = str("{h}h {m}m {s}s".format(h=t_diff.hours, m=t_diff.minutes, s=t_diff.seconds))
+            a.time_elapsed = str(t_diff.hours) + 'h ' + str(t_diff.minutes) + 'm ' + str(t_diff.seconds)
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
