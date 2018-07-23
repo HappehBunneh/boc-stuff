@@ -41,9 +41,9 @@ class Print():
             try:
                 d = self.data[i]
                 while len(c) < self.lenData:
-                c += ' '
+                    c += ' '
                 while len(d) < self.lenData:
-                d += ' '
+                    d += ' '
                 if b > self.fit:
                     self.text += '\n' + c + ':\t' + d + '\t\t' 
                     b = 1
