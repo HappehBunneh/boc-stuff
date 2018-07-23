@@ -5,6 +5,7 @@ import serial
 import gzip
 import sendemail
 import maxprint
+import time
 
 class Console():
     def __init__(self):
@@ -20,6 +21,7 @@ class Console():
         self.data = {}
         self.maxprint = maxprint.Print(self.data, self.dataVariables)
         self.serial = serial.Serial(port=self.port)    
+        self.time_elapsed = 0;
 
     def getRawData(self):
         raw_data = self.serial.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
@@ -79,6 +81,10 @@ class Console():
             sys.stdout.write(a)
             sys.stdout.flush()
 
+    def addTime(self):
+        with open(self.fileLocation, 'a') as f:
+            f.write('\nTime elapsed,' + str(self.time_elapsed))
+
     def compress(self):
         data = open(self.fileLocation).read()
         output = gzip.open(self.fileLocation + '.gz', 'wb')
@@ -115,6 +121,9 @@ if __name__ == '__main__':
                 a.storeData(data)
             a.displayData()
         except (KeyboardInterrupt, SystemExit):
+            a.addTime()
             a.compress()
             b.sendMail()
             exit()
+        time.sleep(1)
+        a.time_elapsed += 1;
