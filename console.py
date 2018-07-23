@@ -124,10 +124,10 @@ if __name__ == '__main__':
             if data[0]:
                 a.storeData(data)
             a.displayData()
+            time.sleep(1)
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()
             b.sendMail()
             exit()
-        time.sleep(1)
        
