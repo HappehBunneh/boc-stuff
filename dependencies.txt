@@ -1,2 +1,2 @@
-pyyaml
-psutil
+pyyaml==3.13
+psutil==lastest
