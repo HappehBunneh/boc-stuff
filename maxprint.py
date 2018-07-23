@@ -39,7 +39,7 @@ class Print():
         for i in self.dataVariables:
             c = i
             try:
-                d = self.data[i]
+                d = str(self.data[i])
                 while len(c) < self.lenData:
                     c += ' '
                 while len(d) < self.lenData:
