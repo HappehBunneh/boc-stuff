@@ -126,7 +126,7 @@ if __name__ == '__main__':
         try:
             a.currentTime = datetime.now()
             t_diff = relativedelta(a.currentTime, a.startTime)
-            a.time_elapsed = str(t_diff.hours) + 'h ' + str(t_diff.minutes) + 'm ' + str(t_diff.seconds)
+            a.time_elapsed = str(t_diff.hours) + 'h ' + str(t_diff.minutes) + 'm ' + str(t_diff.seconds) + 's'
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
