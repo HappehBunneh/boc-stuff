@@ -5,10 +5,13 @@ import serial
 import gzip
 import sendemail
 import maxprint
-import time
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 class Console():
     def __init__(self):
+        self.startTime = datetime.now()
+        self.currentTime = datetime.now()
         with open('config.yaml', 'r') as f:
             config = yaml.load(f)
             self.dataVariables =  config['dataVariables']
@@ -117,14 +120,16 @@ if __name__ == '__main__':
         f.write('\n')
         f.write(','.join(a.dataVariables) + '\n')
     b = sendemail.Mail(a.email, a.pwd, a.recipients, a.fileLocation + '.gz')
+    
     while True:
         try:
-            a.time_elapsed += 1;
+            a.currentTime = datetime.now()
+            a.time_elapsed = relativedelta(a.currentTime, a.startTime)
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
             a.displayData()
-            time.sleep(1)
+           
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()
