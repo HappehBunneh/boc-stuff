@@ -38,15 +38,18 @@ class Print():
         b = 1
         for i in self.dataVariables:
             c = i
-            d = self.data[i]
-            while len(c) < self.lenData:
-               c += ' '
-            while len(d) < self.lenData:
-               d += ' '
-            if b > self.fit:
-                self.text += '\n' + c + ':\t' + d + '\t\t' 
-                b = 1
-            else:
-                self.text += c + ':\t' + d + '\t\t'
-            b += 1
+            try:
+                d = self.data[i]
+                while len(c) < self.lenData:
+                c += ' '
+                while len(d) < self.lenData:
+                d += ' '
+                if b > self.fit:
+                    self.text += '\n' + c + ':\t' + d + '\t\t' 
+                    b = 1
+                else:
+                    self.text += c + ':\t' + d + '\t\t'
+                b += 1
+            except KeyError:
+                pass
         return self.text
