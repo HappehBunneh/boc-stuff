@@ -17,6 +17,7 @@ class Print():
                 if len(i) > length:
                     length = len(i)
             for i in self.data.keys():
+                print self.data[i]
                 if len(self.data[i]) > length:
                     length = len(self.data[i])
         elif type(self.data) == list:
