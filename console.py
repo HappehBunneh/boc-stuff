@@ -51,7 +51,7 @@ class Console():
                 data = data[0]
                 toWriteToFile = '\n' + ','.join([data[i] for i in self.dataVariables])
                 data['TIME_ELAPSED'] = self.time_elapsed
-                data['POWER'] = float(data['STACK_V']) * float(data['STACK_I'])
+                data['POWER'] = float(data['STACK_V'].replace('V', '')) * float(data['STACK_I'].replace('A', ''))
                 toWriteToBuffer = str(data)
         else:
             if data[1]:
