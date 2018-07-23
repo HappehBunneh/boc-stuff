@@ -119,6 +119,7 @@ if __name__ == '__main__':
     b = sendemail.Mail(a.email, a.pwd, a.recipients, a.fileLocation + '.gz')
     while True:
         try:
+            a.time_elapsed += 1;
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
@@ -129,4 +130,4 @@ if __name__ == '__main__':
             b.sendMail()
             exit()
         time.sleep(1)
-        a.time_elapsed += 1;
+       
