@@ -127,7 +127,7 @@ if __name__ == '__main__':
             a.currentTime = datetime.now()
             t_diff = relativedelta(a.currentTime, a.startTime)
             a.time_elapsed = "{h}h {m}m {s}s".format(h=t_diff.hours, m=t_diff.minutes, s=t_diff.seconds)
-            print a.time_elapsed
+            print a.time_elapsed, type(a.time_elapsed)
             time.sleep(20)
             data = a.getRawData()
             if data[0]:
