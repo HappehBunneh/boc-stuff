@@ -43,7 +43,7 @@ dataVariables:
   - DATE
   - TIME
 additionalVariables:
-  - POWER
+  - OUTPUT_POWER
   - TIME_ELAPSED
 port: /dev/ttyUSB0
 buffer: buffer.txt
