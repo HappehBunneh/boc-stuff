@@ -12,6 +12,7 @@ class Console():
         with open('config.yaml', 'r') as f:
             config = yaml.load(f)
             self.dataVariables =  config['dataVariables']
+            self.additionalVariables = config['additionalVariables']
             self.port = config['port']
             self.bufferLocation = config['buffer']
             self.dirLocation = config['test_directory']
@@ -49,6 +50,8 @@ class Console():
             if data[0]:
                 data = data[0]
                 toWriteToFile = '\n' + ','.join([data[i] for i in self.dataVariables])
+                data['TIME_ELAPSED'] = self.time_elapsed
+                data['POWER'] = float(data['STACK_V']) * float(data['STACK_I'])
                 toWriteToBuffer = str(data)
         else:
             if data[1]:
@@ -68,7 +71,7 @@ class Console():
     def displayData(self, dataVariables=None):
         if dataVariables == None:
             dataVariables = self.dataVariables
-        self.maxprint.dataVariables = dataVariables
+        self.maxprint.dataVariables = dataVariables + self.additionalVariables
         with open(self.bufferLocation, 'r') as buffer:
             try:
                 data = eval(buffer.read())

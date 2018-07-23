@@ -42,6 +42,9 @@ dataVariables:
   - IGNORE_10
   - DATE
   - TIME
+additionalVariables:
+  - POWER
+  - TIME_ELAPSED
 port: /dev/ttyUSB0
 buffer: buffer.txt
 test_directory: test_dir
