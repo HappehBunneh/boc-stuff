@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel='stylesheet' href='main.css'>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="main.js"></script> 
+        <title>MaxTerm</title>
+    </head>
+    <body>
+        <div class='output'>Some output over here</div>
+        <div class='graphContainer'>
+            <div class='graph' id='currentGraph'>CurrentGraph</div>
+            <div class='graph' id='voltageGraph'>VoltageGraph</div>
+            <div class='graph' id='tempGraph'>TemperatureGraph</div>
+            <div class='graph' id='powerGraph'>PowerGraph</div>
+        </div>
+        <div class='buttonContainer'>
+            <button id='current' onclick='graph_click(this.id)'>Current</button>
+            <button id='voltage' onclick='graph_click(this.id)'>Voltage</button>
+            <button id='temp' onclick='graph_click(this.id)'>Temperature</button>
+            <button id='power' onclick='graph_click(this.id)'>Power</button>
+        </div>
+        <div class='buttonContainer2' style='background-color: blue'>
+            <button id='start' onclick='button_click(this.id)'>Start</button>
+            <button id='stop' onclick='button_click(this.id)'>Stop</button>
+            <button id='clear' onclick='button_click(this.id)'>Clear</button>
+        </div>
+    </body>
+</html>
