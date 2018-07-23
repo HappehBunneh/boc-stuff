@@ -124,7 +124,8 @@ if __name__ == '__main__':
     while True:
         try:
             a.currentTime = datetime.now()
-            a.time_elapsed = relativedelta(a.currentTime, a.startTime)
+            t_diff = relativedelta(a.currentTime, a.startTime)
+            a.time_elapsed = "{h}h {m}m {s}s".format(h=t_diff.hours, m=t_diff.minutes, s=t_diff.seconds)
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
