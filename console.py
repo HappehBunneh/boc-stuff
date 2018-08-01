@@ -5,12 +5,18 @@ import serial
 import gzip
 import sendemail
 import maxprint
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+import time
 
 class Console():
     def __init__(self):
+        self.startTime = datetime.now()
+        self.currentTime = datetime.now()
         with open('config.yaml', 'r') as f:
             config = yaml.load(f)
             self.dataVariables =  config['dataVariables']
+            self.additionalVariables = config['additionalVariables']
             self.port = config['port']
             self.bufferLocation = config['buffer']
             self.dirLocation = config['test_directory']
@@ -18,8 +24,9 @@ class Console():
             self.email = config['emailusr']
             self.pwd = config['emailpwd']
         self.data = {}
-        self.maxprint = maxprint.Print(self.data, self.dataVariables)
+        self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
         self.serial = serial.Serial(port=self.port)    
+        self.time_elapsed = 0;
 
     def getRawData(self):
         raw_data = self.serial.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
@@ -28,12 +35,18 @@ class Console():
         else:
             raw_data = [i for i in raw_data.split(' ') if i != '']
             if len(raw_data) == len(self.dataVariables):
-                return [dict(zip(self.dataVariables, raw_data))]
+                data  = dict(zip(self.dataVariables, raw_data))
+                data['TIME_ELAPSED'] = self.time_elapsed
+                data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
+                return [data]
             else:
                 if len(raw_data) > len(self.dataVariables):
                     comments = raw_data[:-len(self.dataVariables)]
                     data = raw_data[len(raw_data)-len(self.dataVariables):]
-                    return [' '.join(comments), dict(zip(self.dataVariables, data))]
+                    data = dict(zip(self.dataVariables, data))
+                    data['TIME_ELAPSED'] = self.time_elapsed
+                    data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
+                    return [' '.join(comments), data]
                 elif len(raw_data) < len(self.dataVariables):
                     comments = raw_data
                     return [' '.join(comments), False]
@@ -46,13 +59,13 @@ class Console():
         if len(data) == 1:
             if data[0]:
                 data = data[0]
-                toWriteToFile = '\n' + ','.join([data[i] for i in self.dataVariables])
+                toWriteToFile = '\n' + ','.join([data[i] for i in (self.dataVariables + self.additionalVariables)])
                 toWriteToBuffer = str(data)
         else:
             if data[1]:
                 comments = data[0]
                 data = data[1]
-                toWriteToFile = '\n' + ','.join([data[i] for i in self.dataVariables]) + ',' + comments
+                toWriteToFile = '\n' + ','.join([data[i] for i in (self.dataVariables + self.additionalVariables)]) + ',' + comments
             else:
                 comments = data[0]
                 toWriteToFile = ',' + comments
@@ -66,7 +79,7 @@ class Console():
     def displayData(self, dataVariables=None):
         if dataVariables == None:
             dataVariables = self.dataVariables
-        self.maxprint.dataVariables = dataVariables
+        self.maxprint.dataVariables = dataVariables + self.additionalVariables
         with open(self.bufferLocation, 'r') as buffer:
             try:
                 data = eval(buffer.read())
@@ -78,6 +91,10 @@ class Console():
             a = self.maxprint._print()
             sys.stdout.write(a)
             sys.stdout.flush()
+
+    def addTime(self):
+        with open(self.fileLocation, 'a') as f:
+            f.write('\nTime elapsed,' + str(self.time_elapsed))
 
     def compress(self):
         data = open(self.fileLocation).read()
@@ -106,15 +123,20 @@ if __name__ == '__main__':
         f.write('Serial_Number' + ',' + serialNumber + '\n')
         f.write('Test_Reason' + ',' + testReason + '\n')
         f.write('\n')
-        f.write(','.join(a.dataVariables) + '\n')
+        f.write(','.join(a.dataVariables + a.additionalVariables) + '\n')
     b = sendemail.Mail(a.email, a.pwd, a.recipients, a.fileLocation + '.gz')
     while True:
         try:
+            a.currentTime = datetime.now()
+            t_diff = relativedelta(a.currentTime, a.startTime)
+            a.time_elapsed = str(t_diff.hours) + 'h ' + str(t_diff.minutes) + 'm ' + str(t_diff.seconds) + 's'
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
             a.displayData()
         except (KeyboardInterrupt, SystemExit):
+            a.addTime()
             a.compress()
             b.sendMail()
             exit()
+       
