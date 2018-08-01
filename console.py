@@ -5,6 +5,7 @@ import serial
 import gzip
 import sendemail
 import maxprint
+import updateData
 from datetime import datetime
 import time
 
@@ -60,11 +61,13 @@ class Console():
                 data = data[0]
                 toWriteToFile = '\n' + ','.join([data[i] for i in (self.dataVariables + self.additionalVariables)])
                 toWriteToBuffer = str(data)
+                self.data = data
         else:
             if data[1]:
                 comments = data[0]
                 data = data[1]
                 toWriteToFile = '\n' + ','.join([data[i] for i in (self.dataVariables + self.additionalVariables)]) + ',' + comments
+                self.data = data
             else:
                 comments = data[0]
                 toWriteToFile = ',' + comments
@@ -124,6 +127,7 @@ if __name__ == '__main__':
         f.write('\n')
         f.write(','.join(a.dataVariables + a.additionalVariables) + '\n')
     b = sendemail.Mail(a.email, a.pwd, a.recipients, a.fileLocation + '.gz')
+    c = updateData.Database()
     while True:
         try:
             a.currentTime = datetime.now()
@@ -132,6 +136,12 @@ if __name__ == '__main__':
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
+                if 'STACK_I' in a.data.keys():
+                    current = float(a.data['STACK_I'].replace('A', ''))
+                    voltage = float(a.data['STACK_V'].replace('V', ''))
+                    temp = float(a.data['STACK_TEMP'].replace('C', ''))
+                    power = float(a.data['OUTPUT_POWER'])
+                    c.update(current, power, temp, voltage)
                 a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
