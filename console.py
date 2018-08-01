@@ -141,9 +141,8 @@ if __name__ == '__main__':
                     voltage = float(a.data['STACK_V'].replace('V', ''))
                     temp = float(a.data['STACK_TEMP'].replace('C', ''))
                     power = float(a.data['OUTPUT_POWER'])
-                    print current, voltage, temp, power
                     c.update(current, power, temp, voltage)
-                #a.displayData()
+                a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()

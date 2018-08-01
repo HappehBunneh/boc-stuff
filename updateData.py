@@ -11,6 +11,5 @@ class Database():
 
     def update(self, current, power, temperature, voltage):
         self.sql = 'insert into data values(' + ','.join([str(i) for i in [current, power, temperature, voltage]]) + ')'
-        print self.sql
         self.curs.execute(self.sql)
         self.db.commit()
