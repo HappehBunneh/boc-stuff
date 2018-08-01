@@ -10,7 +10,7 @@ import time
 
 class Console():
     def __init__(self):
-        self.startTime = datetime.now()
+        self.startTime = datetime.datetime(2018, 8, 1, 10, 19, 32, 999808)
         self.currentTime = datetime.now()
         with open('config.yaml', 'r') as f:
             config = yaml.load(f)
@@ -129,11 +129,10 @@ if __name__ == '__main__':
             a.currentTime = datetime.now()
             days, seconds = (a.currentTime - a.startTime).days, (a.currentTime - a.startTime).seconds
             a.time_elapsed = str((days * 24) + (seconds / 3600))
-            print a.time_elapsed
-            #data = a.getRawData()
-            #if data[0]:
-            #a.storeData(data)
-            #a.displayData()
+                data = a.getRawData()
+                if data[0]:
+                    a.storeData(data)
+                    a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()
