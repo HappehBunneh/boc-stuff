@@ -136,7 +136,12 @@ if __name__ == '__main__':
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
-                c.update(a.data['STACK_I'], a.data['OUTPUT_POWER'], a.data['STACK_TEMP'], a.data['STACK_V'])
+                if 'STACK_I' in a.data.keys():
+                    current = float(a.data['STACK_I'].replace('A', ''))
+                    voltage = float(a.data['STACK_V'].replace('V', ''))
+                    temp = float(a.data['STACK_TEMP'].replace('C', ''))
+                    power = float(a.data['OUTPUT_POWER'])
+                    c.update(current, power, temp, voltage)
                 a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
