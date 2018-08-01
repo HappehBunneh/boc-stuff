@@ -133,7 +133,7 @@ if __name__ == '__main__':
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
-            a.displayData()
+            #a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()
