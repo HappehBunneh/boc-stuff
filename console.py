@@ -6,12 +6,11 @@ import gzip
 import sendemail
 import maxprint
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
 import time
 
 class Console():
     def __init__(self):
-        self.startTime = datetime.now()
+        self.startTime = datetime(2018, 7, 31, 10, 19, 32, 999808)
         self.currentTime = datetime.now()
         with open('config.yaml', 'r') as f:
             config = yaml.load(f)
@@ -128,12 +127,12 @@ if __name__ == '__main__':
     while True:
         try:
             a.currentTime = datetime.now()
-            t_diff = relativedelta(a.currentTime, a.startTime)
-            a.time_elapsed = str(t_diff.hours) + 'h ' + str(t_diff.minutes) + 'm ' + str(t_diff.seconds) + 's'
+            days, seconds = (a.currentTime - a.startTime).days, (a.currentTime - a.startTime).seconds
+            a.time_elapsed = str((days * 24) + round((float(seconds) / 3600), 3))
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
-            a.displayData()
+                a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()
