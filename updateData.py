@@ -11,7 +11,7 @@ class Database():
         self.sql = 'drop table data;'
         self.curs.execute(self.sql)
         self.db.commit()
-        self.sql = 'create table data (current float, power float, temperautre float, voltage float)'
+        self.sql = 'create table data (current float, power float, temperature float, voltage float)'
         self.curs.execute(self.sql)
         self.db.commit()
 
