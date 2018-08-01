@@ -130,9 +130,9 @@ if __name__ == '__main__':
             days, seconds = (a.currentTime - a.startTime).days, (a.currentTime - a.startTime).seconds
             a.time_elapsed = str((days * 24) + (seconds / 3600))
             data = a.getRawData()
-                if data[0]:
-                    a.storeData(data)
-                    a.displayData()
+            if data[0]:
+                a.storeData(data)
+                a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()
