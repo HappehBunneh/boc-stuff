@@ -5,6 +5,7 @@ import serial
 import gzip
 import sendemail
 import maxprint
+import updateData
 from datetime import datetime
 import time
 
@@ -124,6 +125,7 @@ if __name__ == '__main__':
         f.write('\n')
         f.write(','.join(a.dataVariables + a.additionalVariables) + '\n')
     b = sendemail.Mail(a.email, a.pwd, a.recipients, a.fileLocation + '.gz')
+    c = updateData.Database()
     while True:
         try:
             a.currentTime = datetime.now()
@@ -132,6 +134,7 @@ if __name__ == '__main__':
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
+                c.update(data['STACK_I'], data['OUTPUT_POWER'], data['STACK_TEMP'], data['STACK_V'])
                 a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
