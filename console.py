@@ -61,11 +61,13 @@ class Console():
                 data = data[0]
                 toWriteToFile = '\n' + ','.join([data[i] for i in (self.dataVariables + self.additionalVariables)])
                 toWriteToBuffer = str(data)
+                self.data = data
         else:
             if data[1]:
                 comments = data[0]
                 data = data[1]
                 toWriteToFile = '\n' + ','.join([data[i] for i in (self.dataVariables + self.additionalVariables)]) + ',' + comments
+                self.data = data
             else:
                 comments = data[0]
                 toWriteToFile = ',' + comments
@@ -134,7 +136,7 @@ if __name__ == '__main__':
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
-                c.update(data['STACK_I'], data['OUTPUT_POWER'], data['STACK_TEMP'], data['STACK_V'])
+                c.update(a.data['STACK_I'], a.data['OUTPUT_POWER'], a.data['STACK_TEMP'], a.data['STACK_V'])
                 a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
