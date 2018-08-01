@@ -142,7 +142,7 @@ if __name__ == '__main__':
                     temp = float(a.data['STACK_TEMP'].replace('C', ''))
                     power = float(a.data['OUTPUT_POWER'])
                     c.update(current, power, temp, voltage)
-                a.displayData()
+                #a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()
