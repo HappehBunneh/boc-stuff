@@ -128,7 +128,7 @@ if __name__ == '__main__':
         try:
             a.currentTime = datetime.now()
             days, seconds = (a.currentTime - a.startTime).days, (a.currentTime - a.startTime).seconds
-            a.time_elapsed = str((days * 24) + (float(seconds) / 3600))
+            a.time_elapsed = str((days * 24) + round((float(seconds) / 3600), 3)
             data = a.getRawData()
             if data[0]:
                 a.storeData(data)
