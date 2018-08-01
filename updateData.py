@@ -10,7 +10,7 @@ class Database():
         self.curs = self.db.cursor()
 
     def update(self, current, power, temperature, voltage):
-        self.sql = 'insert into data values(%d, %d, %d, %d)' % (current, power, temperature, voltage) 
+        self.sql = 'insert into data values(' + ','.join([current, power, temperature, voltage]) + ')'
         print self.sql
         self.curs.execute(self.sql)
         self.db.commit()
