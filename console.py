@@ -10,7 +10,7 @@ import time
 
 class Console():
     def __init__(self):
-        self.startTime = datetime(2018, 7, 31, 10, 19, 32, 999808)
+        self.startTime = datetime.now()
         self.currentTime = datetime.now()
         with open('config.yaml', 'r') as f:
             config = yaml.load(f)
