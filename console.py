@@ -35,12 +35,18 @@ class Console():
         else:
             raw_data = [i for i in raw_data.split(' ') if i != '']
             if len(raw_data) == len(self.dataVariables):
+                data  = dict(zip(self.dataVariables, raw_data))
+                data['TIME_ELAPSED'] = self.time_elapsed
+                data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
                 return [dict(zip(self.dataVariables, raw_data))]
             else:
                 if len(raw_data) > len(self.dataVariables):
                     comments = raw_data[:-len(self.dataVariables)]
                     data = raw_data[len(raw_data)-len(self.dataVariables):]
-                    return [' '.join(comments), dict(zip(self.dataVariables, data))]
+                    data = dict(zip(self.dataVariables, data))
+                    data['TIME_ELAPSED'] = self.time_elapsed
+                    data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
+                    return [' '.join(comments), data]
                 elif len(raw_data) < len(self.dataVariables):
                     comments = raw_data
                     return [' '.join(comments), False]
@@ -54,8 +60,8 @@ class Console():
             if data[0]:
                 data = data[0]
                 toWriteToFile = '\n' + ','.join([data[i] for i in self.dataVariables])
-                data['TIME_ELAPSED'] = self.time_elapsed
-                data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
+                #data['TIME_ELAPSED'] = self.time_elapsed
+                #data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
                 toWriteToBuffer = str(data)
         else:
             if data[1]:
