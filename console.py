@@ -137,11 +137,14 @@ if __name__ == '__main__':
             if data[0]:
                 a.storeData(data)
                 if 'STACK_I' in a.data.keys():
-                    current = float(a.data['STACK_I'].replace('A', ''))
-                    voltage = float(a.data['STACK_V'].replace('V', ''))
-                    temp = float(a.data['STACK_TEMP'].replace('C', ''))
-                    power = float(a.data['OUTPUT_POWER'])
-                    c.update(current, power, temp, voltage)
+                    try:
+                        current = float(a.data['STACK_I'].replace('A', ''))
+                        voltage = float(a.data['STACK_V'].replace('V', ''))
+                        temp = float(a.data['STACK_TEMP'].replace('C', ''))
+                        power = float(a.data['OUTPUT_POWER'])
+                        c.update(current, power, temp, voltage)
+                    except Exception:
+                        pass
                 a.displayData()
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
