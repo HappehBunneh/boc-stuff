@@ -38,7 +38,7 @@ class Console():
                 data  = dict(zip(self.dataVariables, raw_data))
                 data['TIME_ELAPSED'] = self.time_elapsed
                 data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
-                return [dict(zip(self.dataVariables, raw_data))]
+                return [data]
             else:
                 if len(raw_data) > len(self.dataVariables):
                     comments = raw_data[:-len(self.dataVariables)]
@@ -59,15 +59,13 @@ class Console():
         if len(data) == 1:
             if data[0]:
                 data = data[0]
-                toWriteToFile = '\n' + ','.join([data[i] for i in self.dataVariables])
-                #data['TIME_ELAPSED'] = self.time_elapsed
-                #data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
+                toWriteToFile = '\n' + ','.join([data[i] for i in (self.dataVariables + self.additionalVariables)])
                 toWriteToBuffer = str(data)
         else:
             if data[1]:
                 comments = data[0]
                 data = data[1]
-                toWriteToFile = '\n' + ','.join([data[i] for i in self.dataVariables]) + ',' + comments
+                toWriteToFile = '\n' + ','.join([data[i] for i in (self.dataVariables + self.additionalVariables)]) + ',' + comments
             else:
                 comments = data[0]
                 toWriteToFile = ',' + comments
@@ -125,9 +123,8 @@ if __name__ == '__main__':
         f.write('Serial_Number' + ',' + serialNumber + '\n')
         f.write('Test_Reason' + ',' + testReason + '\n')
         f.write('\n')
-        f.write(','.join(a.dataVariables) + '\n')
+        f.write(','.join(a.dataVariables + a.additionalVariables) + '\n')
     b = sendemail.Mail(a.email, a.pwd, a.recipients, a.fileLocation + '.gz')
-    
     while True:
         try:
             a.currentTime = datetime.now()
@@ -137,7 +134,6 @@ if __name__ == '__main__':
             if data[0]:
                 a.storeData(data)
             a.displayData()
-           
         except (KeyboardInterrupt, SystemExit):
             a.addTime()
             a.compress()
