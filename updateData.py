@@ -8,9 +8,12 @@ class Database():
         self.table = 'data'
         self.db = MySQLdb.connect('localhost', self.user, self.pwd, self.database)
         self.curs = self.db.cursor()
-        self.sql = 'drop table data;'
-        self.curs.execute(self.sql)
-        self.db.commit()
+        try:
+            self.sql = 'drop table data;'
+            self.curs.execute(self.sql)
+            self.db.commit()
+        except Exception:
+            pass
         self.sql = 'create table data (ID int NOT NULL AUTO_INCREMENT, current FLOAT, power FLOAT, temperature FLOAT, voltage FLOAT, PRIMARY KEY(ID));'
         self.curs.execute(self.sql)
         self.db.commit()
