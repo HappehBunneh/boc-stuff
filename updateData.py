@@ -11,7 +11,7 @@ class Database():
         self.sql = 'drop table data;'
         self.curs.execute(self.sql)
         self.db.commit()
-        self.sql = 'create table test (ID int NOT NULL AUTO_INCREMENT, current FLOAT, power FLOAT, temperature FLOAT, voltage FLOAT, PRIMARY KEY(ID));'
+        self.sql = 'create table data (ID int NOT NULL AUTO_INCREMENT, current FLOAT, power FLOAT, temperature FLOAT, voltage FLOAT, PRIMARY KEY(ID));'
         self.curs.execute(self.sql)
         self.db.commit()
 
