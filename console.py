@@ -75,6 +75,7 @@ class Console():
                 comments = data[0]
                 toWriteToFile = ',' + comments
         with open(self.bufferLocation, 'w') as buffer:
+            print [toWriteToBuffer, self.raw_data]
             buffer.write(str([toWriteToBuffer, self.raw_data]))
         if self.fileLocation:
             with open(self.fileLocation, 'a') as f:
@@ -146,7 +147,6 @@ if __name__ == '__main__':
             days, seconds = (a.currentTime - a.startTime).days, (a.currentTime - a.startTime).seconds
             a.time_elapsed = str((days * 24) + round((float(seconds) / 3600), 3))
             data = a.getRawData()
-            print data
             if data[0]:
                 a.storeData(data)
                 if 'STACK_I' in a.data.keys():
