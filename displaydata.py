@@ -29,8 +29,6 @@ while True:
     data, serial = eval(bufferData[0]), bufferData[1]
     if data != '':
         print_ = maxprint.Print(data, dataVariables)
-        print print_.data
-        print print_.dataVariables
-        print_._print()
+        print print_._print()
     #print serial
     time.sleep(1)
