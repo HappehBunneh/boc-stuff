@@ -27,7 +27,7 @@ while True:
     with open('buffer.txt', 'r') as f:
         bufferData = eval(f.read())
     data, serial = eval(bufferData[0]), bufferData[1]
-    print data, serial
+    print data
     if data != '':
         print_ = maxprint.Print(data, dataVariables)
         print_._print()
