@@ -29,7 +29,6 @@ class Console():
 
     def setup(self):
         self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
-        
 
     def getRawData(self):
         raw_data = self.serial.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
@@ -147,6 +146,7 @@ if __name__ == '__main__':
             days, seconds = (a.currentTime - a.startTime).days, (a.currentTime - a.startTime).seconds
             a.time_elapsed = str((days * 24) + round((float(seconds) / 3600), 3))
             data = a.getRawData()
+            print data
             if data[0]:
                 a.storeData(data)
                 if 'STACK_I' in a.data.keys():
