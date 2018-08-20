@@ -30,5 +30,4 @@ while True:
     if data != '':
         print_ = maxprint.Print(data, dataVariables)
         print print_._print()
-    #print serial
     time.sleep(1)

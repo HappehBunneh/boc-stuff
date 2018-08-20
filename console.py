@@ -74,6 +74,8 @@ class Console():
             else:
                 comments = data[0]
                 toWriteToFile = ',' + comments
+        with open('serial.txt', 'w') as serial:
+            serial.write(', '.join(self.raw_data))
         with open(self.bufferLocation, 'w') as buffer:
             buffer.write(str([toWriteToBuffer, self.raw_data]))
         if self.fileLocation:
@@ -113,6 +115,14 @@ if __name__ == '__main__':
         modelType = raw_input('\nSpecify model type : ')
         if '150' in modelType or '200' in modelType:
             a.dataVariables = a.dataVariables['150/200']
+            a.setup()
+            break
+        elif '60' in modelType:
+            a.dataVariables = a.dataVariables['60']
+            a.setup()
+            break
+        elif 'old' in modelType.lower():
+            a.dataVariables = a.dataVariables['OLD']
             a.setup()
             break
         else:
