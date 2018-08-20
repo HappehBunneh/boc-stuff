@@ -116,7 +116,8 @@ if __name__ == '__main__':
             a.setup()
             break
         else:
-            print '\nPlease specifiy a valid modelType\n'
+            print '\nPlease specifiy a valid modelType'
+            print 'Models I have include... ' + ','.join(a.dataVariables)
 
     serialNumber = raw_input('\nSpecify serial number : ')
     testReason = raw_input('\nPurpose of test : ')
