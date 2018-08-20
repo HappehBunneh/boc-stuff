@@ -58,7 +58,6 @@ class Console():
                     return [False]
 
     def storeData(self, data):
-        print 'here'
         toWriteToFile = ''
         toWriteToBuffer = ''
         if len(data) == 1:
