@@ -33,11 +33,11 @@ class Console():
 
     def getRawData(self):
         raw_data = self.serial.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
-        print raw_data
         if raw_data == '':
             return [False]
         else:
             raw_data = [i for i in raw_data.split(' ') if i != '']
+            print raw_data
             if len(raw_data) == len(self.dataVariables):
                 data  = dict(zip(self.dataVariables, raw_data))
                 data['TIME_ELAPSED'] = self.time_elapsed
