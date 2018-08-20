@@ -26,8 +26,7 @@ dataVariables = ['STACK_V',
 while True:
     with open('buffer.txt', 'r') as f:
         try:
-            data = eval(f.read())
-            data, serial = data[0], data[1]
+            data, serial = eval(f.read())[0], eval(f.read())[1]
         except Exception:
             print 'rip', f.read()
             pass
