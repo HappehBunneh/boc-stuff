@@ -106,7 +106,14 @@ class Console():
 
 if __name__ == '__main__':
     a = Console()
-    modelType = raw_input('\nSpecify model type : ')
+    while True:
+        modelType = raw_input('\nSpecify model type : ')
+        if '150' in modelType or '200' in modelType:
+            a.dataVariables = a.dataVariables['150/200']
+            break
+        else:
+            print '\nPlease specifiy a valid modelType\n'
+
     serialNumber = raw_input('\nSpecify serial number : ')
     testReason = raw_input('\nPurpose of test : ')
     while True:
