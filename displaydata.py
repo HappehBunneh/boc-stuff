@@ -25,7 +25,7 @@ dataVariables = ['STACK_V',
 
 while True:
     with open('buffer.txt', 'r') as f:
-        print f.read()
+        print f.read(), 'what i read'
     with open('buffer.txt', 'r') as f:
         try:
             data, serial = eval(f.read())[0], eval(f.read())[1]
