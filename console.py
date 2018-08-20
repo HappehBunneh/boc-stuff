@@ -76,9 +76,8 @@ class Console():
             else:
                 comments = data[0]
                 toWriteToFile = ',' + comments
-        if toWriteToBuffer != '':
-            with open(self.bufferLocation, 'w') as buffer:
-                buffer.write([toWriteToBuffer, self.raw_data])
+        with open(self.bufferLocation, 'w') as buffer:
+            buffer.write([toWriteToBuffer, self.raw_data])
         if self.fileLocation:
             with open(self.fileLocation, 'a') as f:
                 f.write(toWriteToFile)
