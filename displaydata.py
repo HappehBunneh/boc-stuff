@@ -28,6 +28,7 @@ while True:
         try:
             data, serial = eval(f.read())[0], eval(f.read())[1]
         except Exception:
+            print 'repo'
             pass
         else:
             if data != '':
