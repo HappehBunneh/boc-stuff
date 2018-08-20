@@ -26,10 +26,11 @@ dataVariables = ['STACK_V',
 while True:
     with open('buffer.txt', 'r') as f:
         try:
-            data = eval(f.read())
+            data, serial = eval(f.read())[0], eval(f.read())[1]
         except Exception:
             pass
         else:
             print_ = maxprint.Print(data, dataVariables)
             print_._print()
+            print serial
     time.sleep(1)

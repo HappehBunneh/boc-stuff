@@ -37,6 +37,7 @@ class Console():
             return [False]
         else:
             raw_data = [i for i in raw_data.split(' ') if i != '']
+            self.raw_data =  raw_data
             if len(raw_data) == len(self.dataVariables):
                 data  = dict(zip(self.dataVariables, raw_data))
                 data['TIME_ELAPSED'] = self.time_elapsed
@@ -76,7 +77,7 @@ class Console():
                 toWriteToFile = ',' + comments
         if toWriteToBuffer != '':
             with open(self.bufferLocation, 'w') as buffer:
-                buffer.write(toWriteToBuffer)
+                buffer.write([toWriteToBuffer, self.raw_data])
         if self.fileLocation:
             with open(self.fileLocation, 'a') as f:
                 f.write(toWriteToFile)
@@ -87,7 +88,7 @@ class Console():
         self.maxprint.dataVariables = dataVariables + self.additionalVariables
         with open(self.bufferLocation, 'r') as buffer:
             try:
-                data = eval(buffer.read())
+                data = eval(buffer.read())[0]
             except Exception:
                 data = ''
         if type(data) == dict:
