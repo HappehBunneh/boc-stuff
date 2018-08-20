@@ -28,6 +28,10 @@ class Console():
         self.serial = serial.Serial(port=self.port)    
         self.time_elapsed = 0;
 
+    def setup(self):
+        self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
+        
+
     def getRawData(self):
         raw_data = self.serial.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
         if raw_data == '':
@@ -110,6 +114,7 @@ if __name__ == '__main__':
         modelType = raw_input('\nSpecify model type : ')
         if '150' in modelType or '200' in modelType:
             a.dataVariables = a.dataVariables['150/200']
+            a.setup()
             break
         else:
             print '\nPlease specifiy a valid modelType\n'
