@@ -1,7 +1,7 @@
-import console
 import time
-a = console.Console()
-variables = ['STACK_V', 
+import maxprint
+
+dataVariables = ['STACK_V', 
              'STACK_I',
              'OUTPUT_2_V',
              'OUTPUT_1_I',
@@ -22,6 +22,14 @@ variables = ['STACK_V',
              'RUNTIME_SEC',
              'DATE',
              'TIME']
+
 while True:
-    a.displayData(variables)
+    with open('buffer.txt', 'r') as f:
+        try:
+            data = eval(f.read())
+        except Exception:
+            pass
+        else:
+            print_ = maxprint.Print(data, dataVariables)
+            print_._print()
     time.sleep(1)

@@ -37,7 +37,6 @@ class Console():
             return [False]
         else:
             raw_data = [i for i in raw_data.split(' ') if i != '']
-            print raw_data
             if len(raw_data) == len(self.dataVariables):
                 data  = dict(zip(self.dataVariables, raw_data))
                 data['TIME_ELAPSED'] = self.time_elapsed
@@ -97,6 +96,7 @@ class Console():
             a = self.maxprint._print()
             sys.stdout.write(a)
             sys.stdout.flush()
+        
 
     def addTime(self):
         with open(self.fileLocation, 'a') as f:
