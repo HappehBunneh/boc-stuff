@@ -27,11 +27,25 @@ class Console():
         self.serial = serial.Serial(port=self.port)    
         self.time_elapsed = 0;
 
+    def readline(self, eol=b'\r\r'):
+        leneol = len(eol)
+        line = bytearray()
+        while True:
+            c = self.serial.read(1)
+            if c:
+                line += c
+                if line[-leneol:] == eol:
+                    break
+            else:
+                break
+        return bytes(line)
+
+
     def setup(self):
         self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
 
     def getRawData(self):
-        raw_data = self.serial.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
+        raw_data = sself.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
         if raw_data == '':
             return [False]
         else:
