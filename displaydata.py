@@ -26,7 +26,7 @@ dataVariables = ['STACK_V',
 while True:
     with open('buffer.txt', 'r') as f:
         bufferData = eval(f.read())
-    data, serial = bufferData[0], bufferData[1]
+    data, serial = eval(bufferData[0]), bufferData[1]
     if data != '':
         print_ = maxprint.Print(data, dataVariables)
         print_._print()
