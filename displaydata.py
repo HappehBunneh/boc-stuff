@@ -28,7 +28,7 @@ while True:
         try:
             data, serial = eval(f.read())[0], eval(f.read())[1]
         except Exception:
-            print 'rip'
+            print 'rip', f.read()
             pass
         else:
             print_ = maxprint.Print(data, dataVariables)
