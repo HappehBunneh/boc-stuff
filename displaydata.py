@@ -25,11 +25,7 @@ dataVariables = ['STACK_V',
 
 while True:
     with open('buffer.txt', 'r') as f:
-        try:
-            data, serial = eval(f.read())[0], eval(f.read())[1]
-        except Exception:
-            print 'repo'
-            pass
+        data = eval(f.read())
         else:
             if data != '':
                 print_ = maxprint.Print(data, dataVariables)
