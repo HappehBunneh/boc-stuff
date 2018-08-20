@@ -75,7 +75,7 @@ class Console():
                 comments = data[0]
                 toWriteToFile = ',' + comments
         with open('serial.txt', 'w') as serial:
-            serial.write(', '.join(self.raw_data))
+            serial.write(str(self.raw_data))
         with open(self.bufferLocation, 'w') as buffer:
             buffer.write(str([toWriteToBuffer, self.raw_data]))
         if self.fileLocation:
