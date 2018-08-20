@@ -24,7 +24,6 @@ class Console():
             self.email = config['emailusr']
             self.pwd = config['emailpwd']
         self.data = {}
-        self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
         self.serial = serial.Serial(port=self.port)    
         self.time_elapsed = 0;
 
