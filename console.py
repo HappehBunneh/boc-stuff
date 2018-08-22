@@ -26,6 +26,7 @@ class Console():
         self.data = {}
         self.serial = serial.Serial(port=self.port)    
         self.time_elapsed = 0;
+        self.model = '150/200'
 
     def readline(self, eol=b'\r\r'):
         leneol = len(eol)
@@ -45,7 +46,12 @@ class Console():
         self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
 
     def getRawData(self):
-        raw_data = sself.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
+        if self.model == '150/200':
+            raw_data = self.readline(b'\r\n\r\n').replace('\r\n', '').replace('\r', ' ')[:-1]
+        elif self.model == '60':
+            raw_data = self.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
+        else:
+            raw_data = self.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
         if raw_data == '':
             return [False]
         else:
@@ -129,14 +135,17 @@ if __name__ == '__main__':
         modelType = raw_input('\nSpecify model type : ')
         if '150' in modelType or '200' in modelType:
             a.dataVariables = a.dataVariables['150/200']
+            a.model = '150/200'
             a.setup()
             break
         elif '60' in modelType:
             a.dataVariables = a.dataVariables['60']
+            a.model = '60'
             a.setup()
             break
         elif 'old' in modelType.lower():
             a.dataVariables = a.dataVariables['OLD']
+            a.model = 'OLD'
             a.setup()
             break
         else:
