@@ -158,7 +158,7 @@ if __name__ == '__main__':
     serialNumber = raw_input('\nSpecify serial number : ')
     testReason = raw_input('\nPurpose of test : ')
     while True:
-        fileName = config['test_directoy'] + '/' + raw_input('\nSpecify filename : ')
+        fileName = config['test_directory'] + '/' + raw_input('\nSpecify filename : ')
         if os.path.exists(fileName):
             if raw_input('\nAlready exists, would you like to overwrite this... (Y/N) ? ').lower() == 'y':
                 os.remove(fileName)
