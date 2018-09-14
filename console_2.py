@@ -128,8 +128,10 @@ class Console():
     
     def startReadingPort(self):
         self.serial = serial.Serial(port=self.port, baudrate=self.baudrate)
+        print 'serial started...'
 
     def run(self):
+        print 'running...'
         self.startReadingPort()
         self.currentTime = datetime.now()
         self.startTime = self.currentTime
