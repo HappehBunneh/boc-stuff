@@ -50,6 +50,8 @@ class Console():
             raw_data = self.readline(b'\r\n\r\n').replace('\r\n', '').replace('\r', ' ')[:-1]
         elif self.model == '60':
             raw_data = self.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
+	elif self.model == 'OLD':
+	    raw_data = self.readline(b'\r\r').replace('\r\n', '').replace('\r', ' ')[:-1]
         else:
             raw_data = self.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
         if raw_data == '':
