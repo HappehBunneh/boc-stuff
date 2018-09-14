@@ -1,2 +1,4 @@
 pyyaml==3.13
-psutil==lastest
+psutil==latest
+influxdb==latest
+pandas==latest

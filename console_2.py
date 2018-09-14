@@ -148,7 +148,7 @@ if __name__ == '__main__':
         model = raw_input('\nSpecify model type : ')
         if '150' in model or '200' in model:
             model = '150/200'
-            breakgt 
+            break
         elif '60' in model:
             model = '60'
             break
