@@ -148,11 +148,11 @@ if __name__ == '__main__':
         model = raw_input('\nSpecify model type : ')
         if '150' in model or '200' in model:
             model = '150/200'
-            break
+            breakgt 
         elif '60' in model:
             model = '60'
             break
-        elif 'old' in model.lower()
+        elif 'old' in model.lower():
             model = 'OLD'
             break
     serialNumber = raw_input('\nSpecify serial number : ')
