@@ -27,6 +27,7 @@ class Console():
         self.data = {}
         self.comments = []
         self.client = InfluxDBClient(host='localhost', port=8086)
+        self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
 
     def readline(self, eol=b'\r\r'):
         leneol = len(eol)
