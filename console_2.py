@@ -118,6 +118,8 @@ class Console():
         #first = datetime.strptime(first, '%Y-%m-%dT%H:%M:%SZ')
         #last = datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')
         q = 'select * from ' + self.fileName.replace('/', '_')
+        print q
+        time.sleep(5)
         df = pd.DataFrame(self.client.query(q).get_points())
         with open(self.fileName, 'w') as logfile:
             logfile.write('Model_Type' + ',' + self.model + '\n')
