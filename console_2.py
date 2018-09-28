@@ -55,7 +55,6 @@ class Console():
         else:
             raw_data = [i for i in raw_data.split(' ') if i != '']
             self.raw_data = raw_data
-            print raw_data
             if len(raw_data) == len(self.dataVariables):
                 data  = dict(zip(self.dataVariables, raw_data))
                 data['TIME_ELAPSED'] = self.time_elapsed
@@ -76,6 +75,7 @@ class Console():
                     return [False]
 
     def saveData(self, data):
+        print data
         if len(data) == 1:
             if data[0]:
                 self.data = data[0]
