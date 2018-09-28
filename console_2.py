@@ -118,7 +118,6 @@ class Console():
         q = 'select * from ' + self.fileName.replace('/', '_')
         df = pd.DataFrame(self.client.query(q, chunked=True, chunk_size=10000).get_points())
         with open(self.fileName, 'w') as logfile:
-            logfile.write()
             logfile.write('Model_Type' + ',' + self.model + '\n')
             logfile.write('Serial_Number' + ',' + self.serialNumber + '\n')
             logfile.write('Test_Reason' + ',' + self.testReason + '\n')
