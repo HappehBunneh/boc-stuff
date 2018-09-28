@@ -121,13 +121,13 @@ class Console():
         df = pd.DataFrame(self.client.query(q, chunked=True, chunk_size=10000).get_points())
         print df
         time.sleep(10)
-        with open(self.fileName, 'w') as logfile:
+        with open(self.fileName + '.csv', 'w') as logfile:
             logfile.write('Model_Type' + ',' + self.model + '\n')
             logfile.write('Serial_Number' + ',' + self.serialNumber + '\n')
             logfile.write('Test_Reason' + ',' + self.testReason + '\n')
             logfile.write('\n')
-            logfile.write(','.join(self.dataVariables + self.additionalVariables) + '\n')
-            df.to_csv(logfile, header=False)
+            #logfile.write(','.join(self.dataVariables + self.additionalVariables) + '\n')
+            df.to_csv(logfile, header=True)
         print 'finished writing'
         time.sleep(10)
         exit()
