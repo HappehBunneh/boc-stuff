@@ -110,6 +110,8 @@ class Console():
 
     def close(self):
         #read dataframe and create .csv file.......
+        os.system('clear')
+        print self.fileName
         first = self.client.query('select BOTTOM(STACK_V, 1) from ' + self.fileName)
         last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName)
         #make these datetime objects...
