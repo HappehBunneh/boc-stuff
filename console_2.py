@@ -78,13 +78,13 @@ class Console():
         if len(data) == 1:
             if data[0]:
                 self.data = data[0]
-                self.client.write_points([{'fields': self.data, 'measurement': self.fileName}])
+                self.client.write_points([{'fields': self.data, 'measurement': self.fileName.replace('/', '|')}])
                 self.comments = []
         else:
             if data[1]:
                 self.comments = data[0]
                 self.data = data[1]
-                self.client.write_points([{'fields': self.data, 'measurement': self.fileName}])
+                self.client.write_points([{'fields': self.data, 'measurement': self.fileName.replace('/', '|')}])
                 self.comments = []
             else:
                 self.comments += data[0]
@@ -111,9 +111,9 @@ class Console():
     def close(self):
         #read dataframe and create .csv file.......
         os.system('clear')
-        print self.fileName, self.client.query('SHOW MEASUREMENTS'), self.client.query('select * from ' + self.fileName)
-        first = self.client.query("select BOTTOM(STACK_V, 1) from " + self.fileName)
-        last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName)
+        print self.fileName, self.client.query('SHOW MEASUREMENTS'), self.client.query('select * from ' + self.fileName.replace('/', '|'))
+        first = self.client.query("select BOTTOM(STACK_V, 1) from " + self.fileName.replace('/', '|'))
+        last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName.replace('/', '|'))
         #make these datetime objects...
         first = datetime.strptime(first, '%Y-%m-%dT%H:%M:%SZ')
         last = datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')
