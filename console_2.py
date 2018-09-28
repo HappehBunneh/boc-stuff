@@ -111,7 +111,7 @@ class Console():
     def close(self):
         #read dataframe and create .csv file.......
         os.system('clear')
-        print self.fileName, self.fileName.split('/')[-1]
+        print self.fileName, self.fileName.split('/')[-1], self.client.query('SHOW MEASUREMENTS')
         first = self.client.query('select BOTTOM(STACK_V, 1) from ' + self.fileName.split('/')[-1])
         last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName.split('/')[-1])
         #make these datetime objects...
