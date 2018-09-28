@@ -24,11 +24,13 @@ def start():
         
 @app.route('/database', methods = ['POST'])
 def command():
+    global client
     query = str(request.values.get("query"))
     results = client.query(query)
     return results
 # run the application
 if __name__ == "__main__":  
+    global client
     app.run(debug=True, port=80)
     client = InfluxDBClient(host='localhost', port=8086)
     client.switch_database('test')
