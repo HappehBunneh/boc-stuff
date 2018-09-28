@@ -1,6 +1,7 @@
 from flask import Flask  
 from flask import render_template
 from flask import request
+from influxdb import InfluxDBClient
 import os
 app = Flask(__name__)
 
@@ -9,7 +10,7 @@ def hello():
     message = "Hello, World"
     return render_template('index.html', message=message)
 
-@app.route('/start',methods = ['POST'])
+@app.route('/start', methods = ['POST'])
 def start():
     os.system('clear')
     print request.values
@@ -21,7 +22,13 @@ def start():
     os.system('python start.py {0} {1} {2} {3}'.format(serial, model, purpose, filename))
     return 'Success'
         
-
+@app.route('/database', methods = ['POST'])
+def command():
+    query = str(request.values.get("query"))
+    results = client.query(query)
+    return results
 # run the application
 if __name__ == "__main__":  
     app.run(debug=True, port=80)
+    client = InfluxDBClient(host='localhost', port=8086)
+    client.switch_database('test')
