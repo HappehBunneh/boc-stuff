@@ -101,7 +101,7 @@ class Console():
             except Exception:
                 data = ''
         print data, type(data)
-        if type(data) == list:
+        if type(data) == dict:
             self.maxprint.data = data
             os.system('clear')
             a = self.maxprint._print()
