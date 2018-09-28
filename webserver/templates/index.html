@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel='stylesheet' href='static/main.css'>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="static/main.js"></script> 
+        <script src="static/jquery-3.3.1.js"></script> 
+        <script>
+            $.get("http://localhost:8086/query?db=test&q=SELECT+*+FROM+lol").done(
+                function (data) { console.log(data);
+            });
+            
+        </script>
+        <title>MaxTerm</title>
+    </head>
+    <body>
+        <div>
+            <div class='output'>
+                lol
+            </div>
+            <select class='databases'>
+            </select>
+            <button class='beep' onclick="updateDatabase();">Refresh Database</button>
+            <button class='remove' onclick="removeDatabase();">Delete Database</button>
+            <input placeholder="Update Interval">
+            <input placeholder="Batch Size">
+            <button class='update' onclick="updateParams();">Update parameters</button>
+            <button class='refresh' onclick="refresh();">Refresh now!</button>
+        </div>
+        <div class='graphContainer'>
+            <div class='graph' id='mainGraph'></div>
+        </div>
+        <div class='console.py'> 
+            <input class='filename' placeholder="Filename" oninput="Call($(this));">
+            <select class='model'>
+                <option value="150/200">150/200</option>
+                <option value="60">60</option>
+                <option value="OLD">OLD</option>
+            </select>
+            <input class='purpose' placeholder="Purpose of test" oninput="Call($(this));">
+            <input class='serial' placeholder="Serial Number" oninput="Call($(this));">
+            <button class='startConsole' onclick="startConsole();">Start</button>
+            <button class='stop' onclick="stopConsole();">Stop</button>
+        </div>
+    </body>
+</html>

@@ -1,4 +1,0 @@
-pyyaml==3.13
-psutil==latest
-influxdb==latest
-pandas==latest

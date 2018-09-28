@@ -29,6 +29,7 @@ class Print():
         return length
 
     def _print(self):
+        os.system('clear')
         self.width = self.getTerminalSize()
         self.lenData = self.getLongestLength()
         self.lenTab = len('\t'.expandtabs())
