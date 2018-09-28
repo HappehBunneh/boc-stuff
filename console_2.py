@@ -110,14 +110,12 @@ class Console():
 
     def close(self):
         #read dataframe and create .csv file.......
-        os.system('clear')
-        print self.fileName, self.client.query('SHOW MEASUREMENTS'), self.client.query('select * from ' + self.fileName.replace('/', '_'))
-        first = self.client.query("select BOTTOM(STACK_V, 1) from " + self.fileName.replace('/', '_'))
-        last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName.replace('/', '_'))
+        #first = self.client.query("select BOTTOM(STACK_V, 1) from " + self.fileName.replace('/', '_'))
+        #last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName.replace('/', '_'))
         #make these datetime objects...
-        first = datetime.strptime(first, '%Y-%m-%dT%H:%M:%SZ')
-        last = datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')
-        q = 'select * from ' + self.fileName
+        #first = datetime.strptime(first, '%Y-%m-%dT%H:%M:%SZ')
+        #last = datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')
+        q = 'select * from ' + self.fileName.replace('/', '_')
         df = pd.DataFrame(self.client.query(q, chunked=True, chunk_size=10000).get_points())
         with open(self.fileName, 'w') as logfile:
             logfile.write()
