@@ -89,7 +89,7 @@ class Console():
             else:
                 self.comments += data[0]
         with open(self.bufferLocation, 'w') as buffer:
-            buffer.write(str(self.data))
+            buffer.write(str([self.data, self.comments]))
         
     def displayData(self, dataVariables=None):
         if dataVariables == None:
