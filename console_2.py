@@ -116,7 +116,7 @@ class Console():
         #first = datetime.strptime(first, '%Y-%m-%dT%H:%M:%SZ')
         #last = datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')
         q = 'select * from ' + self.fileName.replace('/', '_')
-        df = pd.DataFrame(self.client.query(q, chunked=True, chunk_size=10000).get_points())
+        df = pd.DataFrame(self.client.query(q).get_points())
         with open(self.fileName, 'w') as logfile:
             logfile.write('Model_Type' + ',' + self.model + '\n')
             logfile.write('Serial_Number' + ',' + self.serialNumber + '\n')
