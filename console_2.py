@@ -130,7 +130,7 @@ class Console():
             df.to_csv(logfile, header=False)
         print 'finished writing'
         time.sleep(10)
-        exit
+        exit()
     
     def startReadingPort(self):
         self.serial = serial.Serial(port=self.port, baudrate=self.baudrate)
