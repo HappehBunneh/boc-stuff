@@ -196,7 +196,7 @@ function startConsole(){
     var filename = $('.filename').val();
     $.post("../start", {Purpose: purpose, Model: model, Serial: serial, Filename: filename})
         .done(function(data) {
-            alert( "Data Loaded: " + data );
+            console.log( "Data Loaded: " + data );
         });
     console.log(purpose, model, serial, filename);
 }
