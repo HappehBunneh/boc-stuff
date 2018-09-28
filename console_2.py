@@ -97,7 +97,7 @@ class Console():
         self.maxprint.dataVariables = dataVariables + self.additionalVariables
         with open(self.bufferLocation, 'r') as buffer:
             try:
-                data = eval(eval(buffer.read())[0])
+                data = eval(buffer.read())[0]
             except Exception:
                 data = ''
         print data
