@@ -112,8 +112,8 @@ class Console():
         #read dataframe and create .csv file.......
         os.system('clear')
         print self.fileName
-        first = self.client.query('select BOTTOM(STACK_V, 1) from ' + self.fileName)
-        last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName)
+        first = self.client.query('select BOTTOM(STACK_V, 1) from ' + self.fileName.split('/')[-1])
+        last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName.split('/')[-1])
         #make these datetime objects...
         first = datetime.strptime(first, '%Y-%m-%dT%H:%M:%SZ')
         last = datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')
