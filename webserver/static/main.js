@@ -123,6 +123,11 @@ function updateData(data) {
 }
 
 function fetchData() {
+    $.post("../database", {query: 'SELECT * FROM ' + database}).done(function(response){
+        data = response;
+        console.log(data);
+        updateData(data);
+    });
     $.get("http://localhost:8086/query?db=test&epoch=ms&q=SELECT+*+FROM+"+database).done(function (data) { 
         console.log(data, database);
         updateData(data);
@@ -189,6 +194,9 @@ function startConsole(){
     var model = $('.model').val();
     var serial = $('.serial').val();
     var filename = $('.filename').val();
-    $.post( "../start", {Purpose: purpose, Model: model, Serial: serial, Filename: filename});
+    $.post("../start", {Purpose: purpose, Model: model, Serial: serial, Filename: filename})
+        .done(function(data) {
+            alert( "Data Loaded: " + data );
+        });
     console.log(purpose, model, serial, filename);
 }
