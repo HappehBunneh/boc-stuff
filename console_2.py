@@ -109,7 +109,6 @@ class Console():
             sys.stdout.flush()
 
     def close(self):
-        self.serial.close()
         os.system('clear')
         print 'ending it...'
         #read dataframe and create .csv file.......
