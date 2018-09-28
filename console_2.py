@@ -75,7 +75,6 @@ class Console():
                     return [False]
 
     def saveData(self, data):
-        print data
         if len(data) == 1:
             if data[0]:
                 self.data = data[0]
@@ -97,6 +96,7 @@ class Console():
             dataVariables = self.dataVariables
         self.maxprint.dataVariables = dataVariables + self.additionalVariables
         with open(self.bufferLocation, 'r') as buffer:
+            print buffer.read()
             try:
                 data = eval(eval(buffer.read())[0])
             except Exception:
