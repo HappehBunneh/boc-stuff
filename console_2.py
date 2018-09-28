@@ -109,6 +109,9 @@ class Console():
             sys.stdout.flush()
 
     def close(self):
+        self.serial.close()
+        os.system('clear')
+        print 'ending it...'
         #read dataframe and create .csv file.......
         #first = self.client.query("select BOTTOM(STACK_V, 1) from " + self.fileName.replace('/', '_'))
         #last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName.replace('/', '_'))
