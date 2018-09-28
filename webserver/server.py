@@ -12,6 +12,7 @@ def hello():
 @app.route('/start',methods = ['POST'])
 def start():
     os.system('clear')
+    print request.values
     filename = str(request.values.get("Filename"))
     serial = str(request.values.get("Serial"))
     model = str(request.values.get("Model"))
