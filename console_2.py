@@ -50,6 +50,7 @@ class Console():
             raw_data = self.readline(b'\r\n\r\n').replace('\r\n', '').replace('\r', ' ')[:-1]
         else:
             raw_data = self.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
+        print raw_data
         if raw_data == '':
             return [False]
         else:
