@@ -12,10 +12,10 @@ def hello():
 @app.route('/start',methods = ['POST'])
 def start():
     os.system('clear')
-    filename = request.values.get("Filename")
-    serial = request.values.get("Serial")
-    model = request.values.get("Model")
-    purpose = request.values.get("Purpose")
+    filename = str(request.values.get("Filename"))
+    serial = str(request.values.get("Serial"))
+    model = str(request.values.get("Model"))
+    purpose = str(request.values.get("Purpose"))
     print filename, serial, model, purpose
     os.system('python start.py {0} {1} {2} {3}'.format(serial, model, purpose, filename))
     return 'Success'
