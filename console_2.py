@@ -44,6 +44,7 @@ class Console():
         return bytes(line)
 
     def getData(self):
+        self.currentTime = datetime.now()
         days, seconds = (self.currentTime - self.startTime).days, (self.currentTime - self.startTime).seconds
         self.time_elapsed = str((days * 24) + round((float(seconds) / 3600), 3))
         if self.model == '150/200':
