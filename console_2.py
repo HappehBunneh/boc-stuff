@@ -26,7 +26,8 @@ class Console():
         self.additionalVariables = config['additionalVariables']
         self.data = {}
         self.comments = []
-        self.client = InfluxDBClient(host='localhost', port=8086).switch_database('test')
+        self.client = InfluxDBClient(host='localhost', port=8086)
+        self.client.switch_database('test')
         self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
 
     def readline(self, eol=b'\r\r'):
