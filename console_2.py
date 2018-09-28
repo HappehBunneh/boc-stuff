@@ -128,6 +128,8 @@ class Console():
             logfile.write('\n')
             logfile.write(','.join(self.dataVariables + self.additionalVariables) + '\n')
             df.to_csv(logfile, header=False)
+        print 'finished writing'
+        time.sleep(10)
         exit
     
     def startReadingPort(self):
