@@ -96,12 +96,11 @@ class Console():
             dataVariables = self.dataVariables
         self.maxprint.dataVariables = dataVariables + self.additionalVariables
         with open(self.bufferLocation, 'r') as buffer:
-            print buffer.read()
             try:
                 data = eval(eval(buffer.read())[0])
             except Exception:
                 data = ''
-        if type(data) == dict:
+        if type(data) == list:
             self.maxprint.data = data
             os.system('clear')
             a = self.maxprint._print()
