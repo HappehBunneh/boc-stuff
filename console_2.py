@@ -109,18 +109,16 @@ class Console():
             sys.stdout.flush()
 
     def close(self):
-        os.system('clear')
-        print 'ending it...'
         #read dataframe and create .csv file.......
         #first = self.client.query("select BOTTOM(STACK_V, 1) from " + self.fileName.replace('/', '_'))
         #last = self.client.query('select TOP(STACK_V, 1) from ' + self.fileName.replace('/', '_'))
         #make these datetime objects...
         #first = datetime.strptime(first, '%Y-%m-%dT%H:%M:%SZ')
         #last = datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')
+        os.system('clear')
+        print 'Ending process and generating logfile...'
         q = 'select * from ' + self.fileName.replace('/', '_')
-        print q
-        time.sleep(5)
-        df = pd.DataFrame(self.client.query(q).get_points())
+        df = pd.DataFrame(self.client.query(q, chunked=True, chunk_size=10000).get_points())
         with open(self.fileName, 'w') as logfile:
             logfile.write('Model_Type' + ',' + self.model + '\n')
             logfile.write('Serial_Number' + ',' + self.serialNumber + '\n')
@@ -128,6 +126,7 @@ class Console():
             logfile.write('\n')
             logfile.write(','.join(self.dataVariables + self.additionalVariables) + '\n')
             df.to_csv(logfile, header=False)
+        exit
     
     def startReadingPort(self):
         self.serial = serial.Serial(port=self.port, baudrate=self.baudrate)
