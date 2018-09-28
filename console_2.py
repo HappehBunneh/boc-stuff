@@ -100,6 +100,7 @@ class Console():
                 data = eval(eval(buffer.read())[0])
             except Exception:
                 data = ''
+        print data
         if type(data) == list:
             self.maxprint.data = data
             os.system('clear')
