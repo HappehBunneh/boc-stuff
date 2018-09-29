@@ -133,7 +133,7 @@ function fetchData() {
 function getDatabases() {
     console.log('getting databases!!!!');
     $.post('../database', {query: 'SHOW MEASUREMENTS'}).done(function(response){
-        console.log(response[0]);
+        console.log(response);
     });
     /*
     $.get("http://localhost:8086/query?db=test&q=SHOW+MEASUREMENTS").done(function (data) {
