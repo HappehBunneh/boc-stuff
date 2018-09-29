@@ -3,7 +3,10 @@ from flask import render_template
 from flask import request
 from influxdb import InfluxDBClient
 import os
+
 app = Flask(__name__)
+client = InfluxDBClient(host='localhost', port=8086)
+client.switch_database('test')
 
 @app.route("/")
 def hello():  
@@ -32,5 +35,4 @@ def command():
 if __name__ == "__main__":  
     global client
     app.run(debug=True, port=80)
-    client = InfluxDBClient(host='localhost', port=8086)
-    client.switch_database('test')
+    
