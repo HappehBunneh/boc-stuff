@@ -31,7 +31,7 @@ def command():
     if query == 'SHOW MEASUREMENTS':
         results = client.get_list_measurements()
         print results
-        return results
+        return str(results)
     else:
         return 'Lol'
 # run the application
