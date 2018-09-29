@@ -153,9 +153,13 @@ function updateDatabase() {
 }
 
 function removeDatabase() {
-    $.post("http://localhost:8086/query?db=test&q=DROP+MEASUREMENT+"+$('.databases')[0].value).done(function (data) {
+    var queryMessage = 'DROP MEASUREMENT' + $('.databases')[0].value
+    $.post('../database', {query: queryMessage}).done(function(data){
         console.log(data);
     });
+    /*$.post("http://localhost:8086/query?db=test&q=DROP+MEASUREMENT+"+$('.databases')[0].value).done(function (data) {
+        console.log(data);
+    });*/
     getDatabases();
 }
 
@@ -198,5 +202,4 @@ function startConsole(){
         .done(function(data) {
             console.log( "Data Loaded: " + data );
         });
-    console.log(purpose, model, serial, filename);
 }
