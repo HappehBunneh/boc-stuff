@@ -131,6 +131,10 @@ function fetchData() {
 }
 
 function getDatabases() {
+    $.post('../database', {query: 'SHOW MEASUREMENTS'}).done(function(response){
+        console.log(response);
+    });
+    /*
     $.get("http://localhost:8086/query?db=test&q=SHOW+MEASUREMENTS").done(function (data) {
         names = data['results'][0]['series'][0]['values'];
         $('.databases')
@@ -139,7 +143,7 @@ function getDatabases() {
         for (var i = 0; i < names.length; i++) {
             $('.databases').append('<option value="'+names[i][0]+'">'+names[i][0]+'</option>');
         }
-    });
+    });*/
 }
 
 function updateDatabase() {
