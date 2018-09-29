@@ -128,10 +128,6 @@ function fetchData() {
         console.log(data);
         updateData(data);
     });
-    $.get("http://localhost:8086/query?db=test&epoch=ms&q=SELECT+*+FROM+"+database).done(function (data) { 
-        console.log(data, database);
-        updateData(data);
-    });
 }
 
 function getDatabases() {

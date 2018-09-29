@@ -30,6 +30,7 @@ def command():
     query = str(request.values.get("query"))
     print query
     results = client.query(query)
+    print results
     return results
 # run the application
 if __name__ == "__main__":  
