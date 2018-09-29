@@ -30,7 +30,7 @@ def command():
     query = str(request.values.get("query"))
     if query == 'SHOW MEASUREMENTS':
         results = client.get_list_measurements()
-        return str([str(i['names']) for i in results])
+        return str([str(i['name']) for i in results])
     else:
         return 'Lol'
 # run the application
