@@ -28,6 +28,7 @@ def start():
 @app.route('/database', methods = ['POST'])
 def command():
     query = str(request.values.get("query"))
+    print query
     results = client.query(query)
     return results
 # run the application
