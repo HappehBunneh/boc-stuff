@@ -131,6 +131,7 @@ function fetchData() {
 }
 
 function getDatabases() {
+    console.log('getting databases!!!!');
     $.post('../database', {query: 'SHOW MEASUREMENTS'}).done(function(response){
         console.log(response);
     });
