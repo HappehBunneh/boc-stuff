@@ -28,10 +28,12 @@ def start():
 @app.route('/database', methods = ['POST'])
 def command():
     query = str(request.values.get("query"))
-    print query
-    results = client.query(query)
-    print results
-    return results
+    if query == 'SHOW MEASUREMENTS':
+        results = client.get_list_measurements()
+        print results
+        return results
+    else:
+        return 'Lol'
 # run the application
 if __name__ == "__main__":  
     app.run(debug=True, port=80)
