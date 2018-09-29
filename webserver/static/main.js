@@ -134,17 +134,13 @@ function getDatabases() {
     console.log('getting databases!!!!');
     $.post('../database', {query: 'SHOW MEASUREMENTS'}).done(function(response){
         console.log(response);
-    });
-    /*
-    $.get("http://localhost:8086/query?db=test&q=SHOW+MEASUREMENTS").done(function (data) {
-        names = data['results'][0]['series'][0]['values'];
         $('.databases')
             .find('option')
             .remove();
-        for (var i = 0; i < names.length; i++) {
-            $('.databases').append('<option value="'+names[i][0]+'">'+names[i][0]+'</option>');
+        for (var i = 0; i < response.length; i++) {
+            $('.databases').append('<option value="'+response[i]+'">'+response[i]+'</option>')
         }
-    });*/
+    });
 }
 
 function updateDatabase() {
