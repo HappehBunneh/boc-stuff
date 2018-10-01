@@ -43,7 +43,7 @@ def command():
         results = client.query(query + ' ' + batch + ' FROM ' + measurement)
         #print [i[j] for j in i.keys() for i in list(results.get_points(measurement=measurement)) if str(j) in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']]
         results = list(results.get_points(measurement=measurement))
-        results = [{str(k):float(v.replace('A', '').replace('V', '').replace('+', '').replace('C', '')) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
+        results = [{str(k):float(v.replace('A', '').replace('V', '').replace('+', '').replace('C', '').replace('Z', '')) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
         return str(results)
     else:
         return 'Dab'
