@@ -74,7 +74,7 @@ function toggleDataSeries(e){
 }
 
 function updateData(data) {
-    var values = data['results'][0]['series'][0]['values'];
+    /*var values = data['results'][0]['series'][0]['values'];
     var columns = data['results'][0]['series'][0]['columns'];
     console.log(currentData);
     for(var i = 0; i < columns.length; i++){
@@ -112,6 +112,16 @@ function updateData(data) {
             powerData.push({x: values[j][timeIndex], y:values[j][powerIndex]})
             tempData.push({x: values[j][timeIndex], y:values[j][tempIndex]})
         }
+    }*/
+    currentData = [];
+    voltageData = [];
+    powerData = [];
+    tempData = [];
+    for (var i = 0; i < data.length; i++){
+        currentData.push({x: data[i]['time'], y: data[i]['STACK_I']});
+        voltageData.push({x: data[i]['time'], y: data[i]['STACK_V']});
+        powerData.push({x: data[i]['time'], y: data[i]['OUTPUT_POWER']});
+        tempData.push({x: data[i]['time'], y: data[i]['STACK_TEMP']});
     }
     console.log(mainChart.data[0]);
     mainChart.options.data[0].dataPoints = currentData;
