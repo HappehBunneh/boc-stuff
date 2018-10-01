@@ -39,6 +39,7 @@ def command():
     elif query == 'SELECT':
         os.system('clear')
         print 'should be select'
+        print query + ' ' + batch + ' FROM ' + measurement
         results = client.query(query + ' ' + batch + ' FROM ' + measurement)
         return 'Success'
     else:
