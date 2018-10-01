@@ -41,8 +41,8 @@ def command():
         print 'should be select'
         print query + ' ' + batch + ' FROM ' + measurement
         results = client.query(query + ' ' + batch + ' FROM ' + measurement)
-        print list(results.get_points(measurement=measurement))
-        return 'Success'
+        #print [i[j] for j in i.keys() for i in list(results.get_points(measurement=measurement)) if str(j) in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']]
+        return str(list(results.get_points(measurement=measurement)))
     else:
         return 'Dab'
 # run the application
