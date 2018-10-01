@@ -41,7 +41,8 @@ def command():
         print 'should be select'
         print query + ' ' + batch + ' FROM ' + measurement
         results = client.query(query + ' ' + batch + ' FROM ' + measurement)
-        print list(results.get_points(measurement=measurement))
+        #print list(results.get_points(measurement=measurement))
+        print results.raw
         return 'Success'
     else:
         return 'Dab'
