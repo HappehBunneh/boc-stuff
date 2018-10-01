@@ -124,7 +124,7 @@ function updateData(data) {
 
 function fetchData() {
     $.post("../database", {query: 'SELECT', measurement: database, batchsize: '*'}).done(function(response){
-        data = response;
+        data = eval(response);
         console.log(data);
         updateData(data);
     });
