@@ -27,12 +27,20 @@ def start():
         
 @app.route('/database', methods = ['POST'])
 def command():
-    query = str(request.values.get("query"))
-    if query == 'SHOW MEASUREMENTS':
+    query = str(request.values.get('query'))
+    measurement = str(request.values.get('measurement'))
+    batch = str(request.values.get('batchsize'))
+    if query == 'DROP':
+        client.drop_measurement(measurement)
+        return 'Success'
+    elif query == 'SHOW':
         results = client.get_list_measurements()
         return str([str(i['name']) for i in results])
+    elif query == 'SELECT':
+        results = client.query(query + ' ' + batch + ' FROM ' + measurement)
+        return 'Success'
     else:
-        return 'Lol'
+        return 'Dab'
 # run the application
 if __name__ == "__main__":  
     app.run(debug=True, port=80)

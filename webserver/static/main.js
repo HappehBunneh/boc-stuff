@@ -9,7 +9,7 @@ var database = 'lol';
 var check = [false,false,false];
 
 window.onload = function() {
-    console.log('boom');
+    disableButton();
     $('.filename').on('input', ':text', function(){ doSomething(); });
     mainChart = new CanvasJS.Chart("mainGraph", { 
         title: {
@@ -123,7 +123,7 @@ function updateData(data) {
 }
 
 function fetchData() {
-    $.post("../database", {query: 'SELECT * FROM ' + database}).done(function(response){
+    $.post("../database", {query: 'SELECT', measurement: database, batchsize: 0}).done(function(response){
         data = response;
         console.log(data);
         updateData(data);
@@ -131,9 +131,7 @@ function fetchData() {
 }
 
 function getDatabases() {
-    console.log('getting databases!!!!');
-    $.post('../database', {query: 'SHOW MEASUREMENTS'}).done(function(response){
-        console.log(response);
+    $.post('../database', {query: 'SHOW', measurement: 'None', batchsize: 0}).done(function(response){
         response = eval(response);
         $('.databases')
             .find('option')
@@ -151,13 +149,9 @@ function updateDatabase() {
 }
 
 function removeDatabase() {
-    var queryMessage = 'DROP MEASUREMENT' + $('.databases')[0].value
-    $.post('../database', {query: queryMessage}).done(function(data){
+    $.post('../database', {query: 'DROP', measurement: $('.databases')[0].value, batchsize: 0}).done(function(data){
         console.log(data);
     });
-    /*$.post("http://localhost:8086/query?db=test&q=DROP+MEASUREMENT+"+$('.databases')[0].value).done(function (data) {
-        console.log(data);
-    });*/
     getDatabases();
 }
 
