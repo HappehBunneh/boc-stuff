@@ -37,6 +37,8 @@ def command():
         results = client.get_list_measurements()
         return str([str(i['name']) for i in results])
     elif query == 'SELECT':
+        os.system('clear')
+        print 'should be select'
         results = client.query(query + ' ' + batch + ' FROM ' + measurement)
         return 'Success'
     else:
