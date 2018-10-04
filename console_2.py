@@ -117,6 +117,7 @@ class Console():
         #first = datetime.strptime(first, '%Y-%m-%dT%H:%M:%SZ')
         #last = datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')
         os.system('clear')
+        os.environ['running'] = 'False'
         print 'Ending process and generating logfile...'
         q = 'select * from ' + self.fileName.replace('/', '_')
         df = pd.DataFrame(self.client.query(q, chunked=True, chunk_size=10000).get_points())
@@ -135,6 +136,9 @@ class Console():
         print 'serial started...'
 
     def run(self):
+        print 'writing os variables'
+        os.environ['running'] = 'True'
+        os.environ['filename'] = self.fileName
         print 'running...'
         self.startReadingPort()
         self.currentTime = datetime.now()

@@ -52,4 +52,5 @@ else:
     serial = sys.argv[4]
     port = config['port']
     baudrate = config['baudrate']
+    #os.system('python console_2.py' + '')
     Console(serial, model, purpose, filename, port, baudrate).run()
