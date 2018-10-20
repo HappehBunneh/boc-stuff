@@ -45,11 +45,6 @@ def command():
         #print [i[j] for j in i.keys() for i in list(results.get_points(measurement=measurement)) if str(j) in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']]
         results = list(results.get_points(measurement=measurement))
         #results = [{str(k):float(v.replace('A', '').replace('V', '').replace('+', '').replace('C', '').replace('Z', '')) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
-<<<<<<< HEAD
-        print [{str(k):str(v) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
-=======
-       # print [{str(k):str(v) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
->>>>>>> 06b18950a292406d00c9fed529e3fb9dc9898fdf
         results = [{str(k):float(''.join([l for l in str(v) if l in [str(m) for m in range(10)] + ['.']])) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
         return str(results)
     else:
