@@ -7,6 +7,7 @@ var graphs = document.getElementsByClassName('graph');
 var datalols = [];
 var database = 'lol';
 var check = [false,false,false];
+var updating;
 
 window.onload = function() {
     disableButton();
@@ -60,6 +61,8 @@ window.onload = function() {
     });
     mainChart.render();
     getDatabases();
+    var updateRate = parseInt(document.getElementById('updateRate').value);
+    updating = setTimeout(function(){fetchData()}, updateRate * 1000);
     setInterval(function(){fetchData()}, 5000);
 }
 
@@ -138,6 +141,9 @@ function fetchData() {
         console.log(data);
         updateData(data);
     });
+    updateRate = parseInt(document.getElementById('updateRate').value);
+    clearTimeout(updating);
+    updating = setTimeout(function(){fetchData()}, updateRate * 1000);
 }
 
 function getDatabases() {
