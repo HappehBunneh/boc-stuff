@@ -1,10 +1,11 @@
+#!/usr/bin/env python
 from flask import Flask  
 from flask import render_template
 from flask import request
 from influxdb import InfluxDBClient
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='/home/pi/boc-stuff/webserver/templates', static_folder='/home/pi/boc-stuff/webserver/static')
 client = InfluxDBClient(host='localhost', port=8086)
 client.switch_database('test')
 
@@ -44,12 +45,14 @@ def command():
         #print [i[j] for j in i.keys() for i in list(results.get_points(measurement=measurement)) if str(j) in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']]
         results = list(results.get_points(measurement=measurement))
         #results = [{str(k):float(v.replace('A', '').replace('V', '').replace('+', '').replace('C', '').replace('Z', '')) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
-        print [{str(k):str(v) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
-        results = [{str(k):float(str(v).replace('A', '').replace('V', '').replace('+', '').replace('C', '')) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER'] and 'x' not in str(v) and 'r' not in str(v) and 'n' not in str(v)} for i in results]
+       # print [{str(k):str(v) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
+        results = [{str(k):float(''.join([l for l in str(v) if l in [str(m) for m in range(10)] + ['.']])) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
         return str(results)
     else:
         return 'Dab'
 # run the application
 if __name__ == "__main__":  
+    os.chdir('/home/pi/boc-stuff/webserver')
+    print os.getcwd()
     app.run(debug=True, port=80)
     
