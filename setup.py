@@ -15,9 +15,10 @@ os.system('pip install pyyaml')
 os.system('pip install psutil')
 os.system('pip install pandas')
 os.system('pip install influxdb')
+os.system('mkdir data_dir')
 print 'PYTHON DEPENDANCIES INSTALLED'
 print 'STARTING INFLUXDB'
-subprocess.Popen('sudo influxd', close_fds=True)
+os.system('nohup influxd &')
 time.sleep(4)
 print 'CONFIGURING INFLUX'
 from influxdb import InfluxDBClient
