@@ -8,18 +8,18 @@ print 'INSTALLING INFLUX'
 os.system('sudo apt-get update && sudo apt install apt-transport-https curl')
 os.system('curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -')
 os.system('echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list')
-os.system('sudo apt-get update && sudo apt-get install influxdb')
+os.system('sudo apt-get update && sudo apt-get install influxdb -y')
 print 'INFLUX INSTALLED'
 print 'INSTALLING PYTHON DEPENDANCIES'
 os.system('pip install pyyaml')
 os.system('pip install psutil')
-os.system('sudo apt-get install python-pandas')
-os.system('pip install numpy')
+os.system('sudo apt-get install python-pandas -y')
+os.system('sudo apt-get install python-numpy -y')
 os.system('pip install influxdb')
 os.system('mkdir data_dir')
 print 'PYTHON DEPENDANCIES INSTALLED'
 print 'STARTING INFLUXDB'
-os.system('nohup influxd &')
+subprocess.Popen('sudo nohup influxd &', shell=True)
 print 'WAITING....'
 time.sleep(10)
 print 'CONFIGURING INFLUX'
