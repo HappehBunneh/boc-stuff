@@ -25,7 +25,7 @@ dataVariables = ['STACK_V',
              'TIME']
 
 while True:
-    with open('buffer.txt', 'r') as f:
+    with open('/usr/bin/hym_buffer.txt', 'r') as f:
         bufferData = eval(f.read())
     data, serial = bufferData[0], bufferData[1]
     if data != '':
