@@ -13,13 +13,15 @@ print 'INFLUX INSTALLED'
 print 'INSTALLING PYTHON DEPENDANCIES'
 os.system('pip install pyyaml')
 os.system('pip install psutil')
-os.system('pip install pandas')
+os.system('sudo apt-get install python-pandas')
+os.system('pip install numpy')
 os.system('pip install influxdb')
 os.system('mkdir data_dir')
 print 'PYTHON DEPENDANCIES INSTALLED'
 print 'STARTING INFLUXDB'
 os.system('nohup influxd &')
-time.sleep(4)
+print 'WAITING....'
+time.sleep(10)
 print 'CONFIGURING INFLUX'
 from influxdb import InfluxDBClient
 client = InfluxDBClient(host='localhost', port=8086)
