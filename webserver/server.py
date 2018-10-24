@@ -5,7 +5,8 @@ from flask import request
 from influxdb import InfluxDBClient
 import os
 
-app = Flask(__name__, template_folder='/home/pi/boc-stuff/webserver/templates', static_folder='/home/pi/boc-stuff/webserver/static')
+cwd = os.getcwd()
+app = Flask(__name__, template_folder = cwd + '/templates', static_folder = cwd + '/static')
 client = InfluxDBClient(host='localhost', port=8086)
 client.switch_database('test')
 
