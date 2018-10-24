@@ -15,7 +15,7 @@ os.system('pip install pyyaml')
 os.system('pip install psutil')
 os.system('sudo apt-get install python-pandas -y')
 os.system('sudo apt-get install python-numpy -y')
-os.system('pip install influxdb')
+os.system('sudo apt-get install python-influxdb -y')
 os.system('mkdir data_dir')
 print 'PYTHON DEPENDANCIES INSTALLED'
 print 'STARTING INFLUXDB'
