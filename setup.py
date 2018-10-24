@@ -35,12 +35,12 @@ os.system('chmod +x '+cwd+'/switch.py')
 os.system('chmod +x '+cwd+'/webserver/server.py')
 print 'EXECUTABLES CREATED'
 print 'CREATING SYMLINKS'
-os.system('ln -s '+cwd+'/webserver/server.py /usr/bin/server.py')
-os.system('ln -s '+cwd+'/switch.py /usr/bin/hym_on.py')
-os.system('ln -s '+cwd+'/console.py /usr/bin/hym_mon.py')
-os.system('ln -s '+cwd+'/displaydata.py /usr/bin/displaydata.py')
-os.system('ln -s '+cwd+'/config.yaml /usr/bin/config.yaml')
-os.system('ln -s '+cwd+'/buffer.txt /usr/bin/buffer.txt')
+os.system('sudo ln -s '+cwd+'/webserver/server.py /usr/bin/server.py')
+os.system('sudo ln -s '+cwd+'/switch.py /usr/bin/hym_on.py')
+os.system('sudo ln -s '+cwd+'/console.py /usr/bin/hym_mon.py')
+os.system('sudo ln -s '+cwd+'/displaydata.py /usr/bin/displaydata.py')
+os.system('sudo ln -s '+cwd+'/config.yaml /usr/bin/config.yaml')
+os.system('sudo ln -s '+cwd+'/buffer.txt /usr/bin/buffer.txt')
 print 'SYMLINKS CREATED'
 print 'ADDING AUTOSTARTS...'
 os.system("printf '%s\n' '#!/bin/bash' 'nohup influxd &' 'nohup server.py &' 'exit 0' | sudo tee /etc/rc.local")
