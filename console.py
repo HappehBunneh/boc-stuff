@@ -11,7 +11,7 @@ import pandas as pd
 
 class Console():
     def __init__(self, serialNumber, model, testReason, fileName, port, baudrate):
-        with open('config.yaml', 'r') as f:
+        with open('/usr/bin/hym_config.yaml', 'r') as f:
             config = yaml.load(f)
         # Configuration for serial...
         self.baudrate = baudrate
@@ -155,7 +155,7 @@ class Console():
                 self.close()         
 
 if __name__ == '__main__':
-    with open('config.yaml', 'r') as f:
+    with open('/usr/bin/hym_config.yaml', 'r') as f:
             config = yaml.load(f)
     while True:
         model = raw_input('\nSpecify model type : ')
