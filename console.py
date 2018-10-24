@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 import yaml
 import os
 import sys
@@ -153,6 +153,8 @@ class Console():
                     self.displayData()
             except (KeyboardInterrupt, SystemExit):
                 self.close()
+            else:
+                
 
 if __name__ == '__main__':
     with open('config.yaml', 'r') as f:

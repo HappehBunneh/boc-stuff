@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import subprocess
 import time
@@ -10,13 +11,13 @@ os.system('echo "deb https://repos.influxdata.com/debian jessie stable" | sudo t
 os.system('sudo apt-get update && sudo apt-get install influxdb')
 print 'INFLUX INSTALLED'
 print 'INSTALLING PYTHON DEPENDANCIES'
-os.system('pip install yaml')
+os.system('pip install pyyaml')
 os.system('pip install psutil')
 os.system('pip install pandas')
 os.system('pip install influxdb')
 print 'PYTHON DEPENDANCIES INSTALLED'
 print 'STARTING INFLUXDB'
-subprocess.Popen('influxd', close_fds=True)
+subprocess.Popen('sudo influxd', close_fds=True)
 time.sleep(4)
 print 'CONFIGURING INFLUX'
 from influxdb import InfluxDBClient
@@ -26,14 +27,14 @@ client.close()
 print 'INFLUX CONFIGURED'
 print 'CREATING EXECUTABLES'
 os.system('chmod +x '+cwd+'/displaydata.py')
-os.system('chmod +x '+cwd+'/console_2.py')
+os.system('chmod +x '+cwd+'/console.py')
 os.system('chmod +x '+cwd+'/switch.py')
 os.system('chmod +x '+cwd+'/webserver/server.py')
 print 'EXECUTABLES CREATED'
 print 'CREATING SYMLINKS'
 os.system('ln -s '+cwd+'/webserver/server.py /usr/bin/server.py')
 os.system('ln -s '+cwd+'/switch.py /usr/bin/hym_on.py')
-os.system('ln -s '+cwd+'/console_2.py /usr/bin/hym_mon.py')
+os.system('ln -s '+cwd+'/console.py /usr/bin/hym_mon.py')
 os.system('ln -s '+cwd+'/displaydata.py /usr/bin/displaydata.py')
 os.system('ln -s '+cwd+'/config.yaml /usr/bin/config.yaml')
 os.system('ln -s '+cwd+'/buffer.txt /usr/bin/buffer.txt')

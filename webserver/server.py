@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 from flask import Flask  
 from flask import render_template
 from flask import request
