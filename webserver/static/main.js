@@ -14,7 +14,7 @@ window.onload = function() {
     $('.filename').on('input', ':text', function(){ doSomething(); });
     mainChart = new CanvasJS.Chart("mainGraph", { 
         title: {
-            text: "One Graph to rule them all"
+            text: "BOC_HYMERA_CONTROL"
         },
         axisY: {
             includeZero: false
@@ -31,14 +31,14 @@ window.onload = function() {
         data: [
             {
                 showInLegend: true,
-                name: "Current",
+                name: "Stack_Current",
                 type: "line",
                 xValueType: "dateTime",
                 dataPoints: currentData,
             },
             {
                 showInLegend: true,
-                name: "Voltage",
+                name: "Stack_Voltage",
                 type: "line",
                 xValueType: "dateTime",
                 dataPoints: voltageData,
