@@ -152,9 +152,7 @@ class Console():
                     self.saveData(data)
                     self.displayData()
             except (KeyboardInterrupt, SystemExit):
-                self.close()
-            else:
-                
+                self.close()         
 
 if __name__ == '__main__':
     with open('config.yaml', 'r') as f:

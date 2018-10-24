@@ -46,4 +46,4 @@ print 'SYMLINKS CREATED'
 print 'ADDING AUTOSTARTS...'
 os.system("printf '%s\n' '#!/bin/bash' 'nohup influxd &' 'nohup server.py &' 'exit 0' | sudo tee /etc/rc.local")
 print 'AUTOSTARTS ADDED'
-print 'GOOD TO GO!'
+print 'REBOOT AND GOOD TO GO!'
