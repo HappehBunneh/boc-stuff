@@ -67,6 +67,7 @@ class Console():
                     comments = raw_data[:-len(self.dataVariables)]
                     data = raw_data[len(raw_data)-len(self.dataVariables):]
                     data = dict(zip(self.dataVariables, data))
+                    print comments, data
                     data['TIME_ELAPSED'] = self.time_elapsed
                     data['OUTPUT_POWER'] = str(float(data['OUTPUT_1_I'].replace('A', '')) * float(data['OUTPUT_2_V'].replace('V', '')))
                     return [' '.join(comments), data]
