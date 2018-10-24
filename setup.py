@@ -13,6 +13,7 @@ print 'INFLUX INSTALLED'
 print 'INSTALLING PYTHON DEPENDANCIES'
 os.system('pip install pyyaml')
 os.system('pip install psutil')
+os.system('pip install flask')
 os.system('sudo apt-get install python-pandas -y')
 os.system('sudo apt-get install python-numpy -y')
 os.system('sudo apt-get install python-influxdb -y')
