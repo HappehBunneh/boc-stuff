@@ -63,7 +63,6 @@ window.onload = function() {
     getDatabases();
     var updateRate = parseInt(document.getElementById('updateRate').value);
     updating = setTimeout(function(){fetchData()}, updateRate * 1000);
-    setInterval(function(){fetchData()}, 5000);
 }
 
 function toggleDataSeries(e){
