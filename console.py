@@ -149,8 +149,14 @@ class Console():
             try:
                 data = self.getData()
                 if data[0]:
+                    os.system('clear')
                     self.saveData(data)
-                    self.displayData()
+                    self.maxprint.dataVariables = self.dataVariables + self.additionalVariables
+                    self.maxprint.data = data
+                    a = self.maxprint._print()
+                    sys.stdout.write(a)
+                    sys.stdout.flush()
+                    #self.displayData()
             except (KeyboardInterrupt, SystemExit):
                 self.close()         
 
