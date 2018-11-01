@@ -123,7 +123,7 @@ class Console():
         print 'Ending process and generating logfile...'
         q = 'select * from ' + self.fileName.replace('/', '_')
         df = pd.DataFrame(self.client.query(q, chunked=True, chunk_size=10000).get_points())
-        with open(self.fileName + '.csv', 'w') as logfile:
+        with open(self.fileName + '.csv', 'w+') as logfile:
             logfile.write('Model_Type' + ',' + self.model + '\n')
             logfile.write('Serial_Number' + ',' + self.serialNumber + '\n')
             logfile.write('Test_Reason' + ',' + self.testReason + '\n')
