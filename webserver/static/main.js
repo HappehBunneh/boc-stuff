@@ -139,7 +139,7 @@ function fetchData() {
     if ($('#batchSize').val() == '0') {
         batchSize = '9999999999';
     } else if ($('#batchSize').val() == '') {
-        batchSize = '9999999999';
+        batchSize = '1800';
     } else {
         batchSize = $('#batchSize').val();
     }
