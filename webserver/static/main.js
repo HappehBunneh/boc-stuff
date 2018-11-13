@@ -153,11 +153,14 @@ function fetchData() {
         batchSize = $('#batchSize').val();
     }
     console.log('batchsize is ' + batchSize);
+    then = new Date();
     $.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
         data = eval(response);
         console.log('GOT DATA');
         updateData(data);
     });
+    now = new Date();
+    console.log('TOOK ' + (now-then)/1000 + ' TO SEND AJAX REQUEST, PROCESS DATA AND RENDER CHART')
 }
 
 function getDatabases() {
