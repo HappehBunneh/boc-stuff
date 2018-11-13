@@ -135,13 +135,14 @@ function updateData(data) {
 }
 
 function fetchData() {
+    console.log('FETCHING DATA...')
     $.post("../database", {query: 'SELECT', measurement: database, batchsize: '*'}).done(function(response){
         data = eval(response);
-        console.log(data);
         updateData(data);
     });
     updateRate = parseInt(document.getElementById('updateRate').value);
     clearTimeout(updating);
+    console.log('UPDATE RATE... -> ' + updateRate);
     updating = setTimeout(function(){fetchData()}, updateRate * 1000);
 }
 
