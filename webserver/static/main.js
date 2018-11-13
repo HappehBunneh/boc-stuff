@@ -140,7 +140,11 @@ function fetchData() {
         data = eval(response);
         updateData(data);
     });
-    updateRate = parseInt(document.getElementById('updateRate').value);
+    if ($('.updateRate').attr('value') == '') {
+        updateRate == 5;
+    } else {
+        updateRate = parseInt(document.getElementById('updateRate').value);
+    }
     console.log('UPDATE RATE VALUE' + document.getElementById('updateRate').value);
     clearTimeout(updating);
     console.log('UPDATE RATE... -> ' + updateRate);
