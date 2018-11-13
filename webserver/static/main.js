@@ -169,6 +169,7 @@ function fetchData() {
         success: function(response){
             recieveAjax = new Date();
             console.log('===============');
+            console.log(recieveAjax);
             console.log('TOOK ' + (recieveAjax-sendAjax)/1000 + ' TO SEND AND RECIEVE DATA FROM BACKEND');
             data = eval(response);
             updateData(data);
