@@ -11,9 +11,9 @@ os.system('echo "deb https://repos.influxdata.com/debian jessie stable" | sudo t
 os.system('sudo apt-get update && sudo apt-get install influxdb -y')
 print 'INFLUX INSTALLED'
 print 'INSTALLING PYTHON DEPENDANCIES'
-os.system('pip install pyyaml')
 os.system('pip install psutil')
 os.system('pip install flask')
+os.system('sudo apt-get install python-yaml')
 os.system('sudo apt-get install python-pandas -y')
 os.system('sudo apt-get install python-numpy -y')
 os.system('sudo apt-get install python-influxdb -y')
@@ -31,7 +31,7 @@ client.close()
 print 'INFLUX CONFIGURED'
 print 'CREATING EXECUTABLES'
 os.system('chmod +x '+cwd+'/displaydata.py')
-os.system('chmod +x '+cwd+'/console.py')
+os.system('sudo chmod +x '+cwd+'/console.py')
 os.system('chmod +x '+cwd+'/switch.py')
 os.system('chmod +x '+cwd+'/webserver/server.py')
 print 'EXECUTABLES CREATED'
