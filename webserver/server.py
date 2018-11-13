@@ -32,9 +32,9 @@ def start():
 def command():
     client.switch_database('test')
     print request.json
-    query = str(request.values.get('query'))
-    measurement = str(request.values.get('measurement'))
-    batch = str(request.values.get('batchsize'))
+    query = str(request.json['query'])
+    measurement = str(request.json['measurement'])
+    batch = str(request.values.json['batchsize'])
     if query == 'DROP':
         client.drop_measurement(measurement)
         return 'Success'
