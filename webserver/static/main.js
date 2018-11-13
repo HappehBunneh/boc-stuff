@@ -141,6 +141,9 @@ function fetchData() {
         updateData(data);
     });
     updateRate = parseInt(document.getElementById('updateRate').value);
+    if (updateRate == NaN) {
+        updateRate = 5;
+    }
     clearTimeout(updating);
     console.log('UPDATE RATE... -> ' + updateRate);
     updating = setTimeout(function(){fetchData()}, updateRate * 1000);
