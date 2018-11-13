@@ -189,6 +189,7 @@ function getSerialData() {
 }
 
 function refreshNow() {
+    sendAjax = new Date();
     $.ajax({
         type:"POST", 
         url: "database", 
