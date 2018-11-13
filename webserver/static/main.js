@@ -136,7 +136,15 @@ function updateData(data) {
 
 function fetchData() {
     console.log('FETCHING DATA...');
-    $.post("../database", {query: 'SELECT', measurement: database, batchsize: '2'}).done(function(response){
+    if ($('#batchSize').val() == '0') {
+        batchSize = '9999999999';
+    } else if ($('#batchSize').val() == '') {
+        batchSize = '9999999999';
+    } else {
+        batchSize = $('#batchSize').val();
+    }
+    console.log('batchsize is ' + batchSize);
+    $.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
         data = eval(response);
         updateData(data);
     });
