@@ -156,7 +156,7 @@ function fetchData() {
     }
     console.log('batchsize is ' + batchSize);
     sendAjax = new Date();
-    $.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
+    /*$.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
         recieveAjax = new Date();
         console.log('TOOK ' + (recieveAjax-sendAjax)/1000 + ' TO SEND AND RECIEVE DATA FROM BACKEND');
         then = new Date();
@@ -164,6 +164,11 @@ function fetchData() {
         updateData(data);
         now = new Date();
         console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
+    });*/
+    $.ajax({url: "../database", data: {query: 'SELECT', measurement: database, batchsize: batchSize}, contentType: 'application/json', success: function(response){
+            data = eval(response);
+            updateData(data);
+        }
     });
 }
 
