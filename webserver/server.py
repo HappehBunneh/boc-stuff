@@ -55,7 +55,7 @@ def command():
         #results = [{str(k):float(v.replace('A', '').replace('V', '').replace('+', '').replace('C', '').replace('Z', '')) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
         #results = [{str(k):float(''.join([l for l in str(v) if l in [str(m) for m in range(10)] + ['.']])) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
         print 'TOOK ',(datetime.datetime.now()-start).seconds,' TO FILTER AND CHECK DATA, NOW RETURNING...'
-        print str(results)
+        #print str(results)
         return str(results)
     else:
         return 'Dab'
