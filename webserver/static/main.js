@@ -150,7 +150,6 @@ function fetchData() {
         updateRate = parseInt($('#updateRate').val());
     }
     console.log('batchsize is ' + batchSize);
-    sendAjax = new Date();
     /*$.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
         recieveAjax = new Date();
         console.log('TOOK ' + (recieveAjax-sendAjax)/1000 + ' TO SEND AND RECIEVE DATA FROM BACKEND');
@@ -160,24 +159,26 @@ function fetchData() {
         now = new Date();
         console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
     });*/
+    console.log('sending ajax request...');
+    sendAjax = new Date();
     $.ajax({
         type:"POST", 
         url: "database", 
         data: JSON.stringify({query: 'SELECT', measurement: database, batchsize: batchSize}), 
         contentType: 'application/json', 
         success: function(response){
-            then = new Date();
+            recieveAjax = new Date();
+            console.log('===============');
+            console.log('TOOK ' + (recieveAjax-sendAjax)/1000 + ' TO SEND AND RECIEVE DATA FROM BACKEND');
             data = eval(response);
             updateData(data);
-            now = new Date();
-            console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
         }
     });
     console.log('UPDATE RATE VALUE' + document.getElementById('updateRate').value);
     clearTimeout(updating);
     console.log('UPDATE RATE... -> ' + updateRate);
     updating = setTimeout(function(){fetchData()}, updateRate * 1000);
-    console.log('FETCHING DATA...');
+    
 }
 
 function getSerialData() {
