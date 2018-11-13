@@ -37,7 +37,7 @@ def command():
         client.drop_measurement(measurement)
         return 'Success'
     elif query == 'SHOW':
-        results = client.get_list_measurements()
+        results = list(client.query("SHOW MEASUREMENTS").get_points())
         return str([str(i['name']) for i in results])
     elif query == 'SELECT':
         os.system('clear')
