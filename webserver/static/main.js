@@ -8,7 +8,8 @@ var datalols = [];
 var database = 'lol';
 var check = [false,false,false];
 var updating;
-
+var sendAjax;
+var recieveAjax;
 window.onload = function() {
     disableButton();
     $('.filename').on('input', ':text', function(){ doSomething(); });
@@ -116,7 +117,6 @@ function updateData(data) {
             tempData.push({x: values[j][timeIndex], y:values[j][tempIndex]})
         }
     }*/
-    then = new Date();
     currentData = [];
     voltageData = [];
     powerData = [];
@@ -133,8 +133,6 @@ function updateData(data) {
     mainChart.options.data[2].dataPoints = powerData;
     mainChart.options.data[3].dataPoints = tempData;
     mainChart.render();
-    now = new Date();
-    console.log('TOOK ' + (now-then)/1000 + ' TO SEND AJAX REQUEST, PROCESS DATA AND RENDER CHART');
 }
 
 function fetchData() {
@@ -156,9 +154,15 @@ function fetchData() {
         batchSize = $('#batchSize').val();
     }
     console.log('batchsize is ' + batchSize);
+    sendAjax = new Date();
     $.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
+        recieveAjax = new Date();
+        console.log('TOOK ' + (recieveAjax-sendAjax)/1000 + ' TO SEND AND RECIEVE DATA FROM BACKEND');
+        then = new Date();
         data = eval(response);
         updateData(data);
+        now = new Date();
+        console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
     });
 }
 
