@@ -156,7 +156,6 @@ function fetchData() {
         batchSize = $('#batchSize').val();
     }
     console.log('batchsize is ' + batchSize);
-    
     $.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
         data = eval(response);
         updateData(data);
