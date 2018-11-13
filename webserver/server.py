@@ -51,7 +51,7 @@ def command():
         #print [i[j] for j in i.keys() for i in list(results.get_points(measurement=measurement)) if str(j) in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']]
         results = list(results.get_points(measurement=measurement))
         print 'TOOK ',(datetime.datetime.now()-start).seconds,' TO LIST DATA'
-        results = [{str(k):str(v) for k,v in i} for i in results]
+        results = [{str(k):float(''.join([l for l in str(v) if l in ['0','1','2','3','4','5','6','7','8','9','.']])) for k,v in i} for i in results]
         #results = [{str(k):float(v.replace('A', '').replace('V', '').replace('+', '').replace('C', '').replace('Z', '')) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
         #results = [{str(k):float(''.join([l for l in str(v) if l in [str(m) for m in range(10)] + ['.']])) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
         print 'TOOK ',(datetime.datetime.now()-start).seconds,' TO FILTER AND CHECK DATA, NOW RETURNING...'
