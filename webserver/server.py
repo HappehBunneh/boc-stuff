@@ -47,13 +47,13 @@ def command():
         print client._database
         start = datetime.datetime.now()
         results = client.query(query + ' "STACK_I","STACK_V","OUTPUT_POWER","STACK_TEMP"' + ' FROM ' + measurement + ' GROUP BY * ORDER BY DESC LIMIT ' + batch, epoch='ms')
-        print 'TOOK ' + (datatime.datatime.now()-start).seconds + ' TO GET DATA'
+        print 'TOOK ' + (datetime.datetime.now()-start).seconds + ' TO GET DATA'
         #print [i[j] for j in i.keys() for i in list(results.get_points(measurement=measurement)) if str(j) in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']]
         results = list(results.get_points(measurement=measurement))
-        print 'TOOK ' + (datatime.datatime.now()-start).seconds + ' TO LIST DATA'
+        print 'TOOK ' + (datetime.datetime.now()-start).seconds + ' TO LIST DATA'
         #results = [{str(k):float(v.replace('A', '').replace('V', '').replace('+', '').replace('C', '').replace('Z', '')) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
         results = [{str(k):float(''.join([l for l in str(v) if l in [str(m) for m in range(10)] + ['.']])) for k,v in i.items() if k in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']} for i in results]
-        print 'TOOK ' + (datatime.datatime.now()-start).seconds + ' TO FILTER AND CHECK DATA, NOW RETURNING...'
+        print 'TOOK ' + (datetime.datetime.now()-start).seconds + ' TO FILTER AND CHECK DATA, NOW RETURNING...'
         return str(results)
     else:
         return 'Dab'
