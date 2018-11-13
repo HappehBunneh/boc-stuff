@@ -43,6 +43,7 @@ def command():
         os.system('clear')
         print 'should be select'
         print query + ' "STACK_I","STACK_V","OUTPUT_POWER","STACK_TEMP"' + ' FROM ' + measurement + ' GROUP BY * ORDER BY DESC LIMIT ' + batch
+        print client._database
         results = client.query(query + '"STACK_I","STACK_V","OUTPUT_POWER","STACK_TEMP"' + ' FROM ' + measurement + ' GROUP BY * ORDER BY DESC LIMIT ' + batch, epoch='ms')
         #print [i[j] for j in i.keys() for i in list(results.get_points(measurement=measurement)) if str(j) in ['time', 'STACK_V', 'STACK_I', 'STACK_TEMP', 'OUTPUT_POWER']]
         results = list(results.get_points(measurement=measurement))
