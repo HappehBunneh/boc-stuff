@@ -188,13 +188,19 @@ function getSerialData() {
 }
 
 function getDatabases() {
-    $.post('../database', {query: 'SHOW', measurement: 'None', batchsize: 0}).done(function(response){
-        response = eval(response);
-        $('.databases')
-            .find('option')
-            .remove();
-        for (var i = 0; i < response.length; i++) {
-            $('.databases').append('<option value="'+response[i]+'">'+response[i]+'</option>')
+    $.ajax({
+        type:"POST", 
+        url: "database", 
+        data: JSON.stringify({query: 'SHOW', measurement: 'None', batchsize: 0}), 
+        contentType: 'application/json', 
+        success: function(response){
+            response = eval(response);
+            $('.databases')
+                .find('option')
+                .remove();
+            for (var i = 0; i < response.length; i++) {
+                $('.databases').append('<option value="'+response[i]+'">'+response[i]+'</option>')
+            }
         }
     });
 }
