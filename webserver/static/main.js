@@ -131,7 +131,7 @@ function updateData(data) {
     mainChart.options.data[2].dataPoints = powerData;
     mainChart.options.data[3].dataPoints = tempData;
     mainChart.render();
-    
+    console.log('data processed and loaded');
 }
 
 function fetchData() {
@@ -155,6 +155,7 @@ function fetchData() {
     console.log('batchsize is ' + batchSize);
     $.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
         data = eval(response);
+        console.log('GOT DATA');
         updateData(data);
     });
 }
