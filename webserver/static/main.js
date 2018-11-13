@@ -160,7 +160,12 @@ function fetchData() {
         now = new Date();
         console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
     });*/
-    $.ajax({type:"POST", url: "../database", data: {query: 'SELECT', measurement: database, batchsize: batchSize}, contentType: 'application/json', success: function(response){
+    $.ajax({
+        type:"POST", 
+        url: "database", 
+        data: JSON.stringify({query: 'SELECT', measurement: database, batchsize: batchSize}), 
+        contentType: 'application/json', 
+        success: function(response){
             then = new Date();
             data = eval(response);
             updateData(data);
