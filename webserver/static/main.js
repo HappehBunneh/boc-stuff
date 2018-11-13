@@ -76,6 +76,7 @@ function toggleDataSeries(e){
 }
 
 function updateData(data) {
+    console.log('DATA RECIEVED');
     /*var values = data['results'][0]['series'][0]['values'];
     var columns = data['results'][0]['series'][0]['columns'];
     console.log(currentData);
@@ -115,6 +116,7 @@ function updateData(data) {
             tempData.push({x: values[j][timeIndex], y:values[j][tempIndex]})
         }
     }*/
+    then = new Date();
     currentData = [];
     voltageData = [];
     powerData = [];
@@ -131,7 +133,8 @@ function updateData(data) {
     mainChart.options.data[2].dataPoints = powerData;
     mainChart.options.data[3].dataPoints = tempData;
     mainChart.render();
-    console.log('data processed and loaded');
+    now = new Date();
+    console.log('TOOK ' + (now-then)/1000 + ' TO SEND AJAX REQUEST, PROCESS DATA AND RENDER CHART');
 }
 
 function fetchData() {
@@ -153,14 +156,11 @@ function fetchData() {
         batchSize = $('#batchSize').val();
     }
     console.log('batchsize is ' + batchSize);
-    then = new Date();
+    
     $.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
         data = eval(response);
-        console.log('GOT DATA');
         updateData(data);
     });
-    now = new Date();
-    console.log('TOOK ' + (now-then)/1000 + ' TO SEND AJAX REQUEST, PROCESS DATA AND RENDER CHART')
 }
 
 function getDatabases() {
