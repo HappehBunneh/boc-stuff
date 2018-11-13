@@ -135,7 +135,7 @@ function updateData(data) {
 }
 
 function fetchData() {
-    console.log('FETCHING DATA...')
+    console.log('FETCHING DATA...');
     $.post("../database", {query: 'SELECT', measurement: database, batchsize: '*'}).done(function(response){
         data = eval(response);
         updateData(data);
