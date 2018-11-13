@@ -31,7 +31,7 @@ def start():
 @app.route('/database', methods = ['POST'])
 def command():
     client.switch_database('test')
-    print request
+    print request.values
     query = str(request.values.get('query'))
     measurement = str(request.values.get('measurement'))
     batch = str(request.values.get('batchsize'))
