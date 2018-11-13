@@ -137,24 +137,6 @@ function updateData(data) {
 }
 
 function fetchData() {
-    if ($('#updateRate').val() == '') {
-        updateRate == 5;
-    } else {
-        updateRate = parseInt($('#updateRate').val());
-    }
-    console.log('UPDATE RATE VALUE' + document.getElementById('updateRate').value);
-    clearTimeout(updating);
-    console.log('UPDATE RATE... -> ' + updateRate);
-    updating = setTimeout(function(){fetchData()}, updateRate * 1000);
-    console.log('FETCHING DATA...');
-    if ($('#batchSize').val() == '0') {
-        batchSize = '9999999999';
-    } else if ($('#batchSize').val() == '') {
-        batchSize = '1800';
-    } else {
-        batchSize = $('#batchSize').val();
-    }
-    console.log('batchsize is ' + batchSize);
     sendAjax = new Date();
     /*$.post("../database", {query: 'SELECT', measurement: database, batchsize: batchSize}).done(function(response){
         recieveAjax = new Date();
@@ -173,6 +155,24 @@ function fetchData() {
             console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
         }
     });
+    if ($('#updateRate').val() == '') {
+        updateRate == 5;
+    } else {
+        updateRate = parseInt($('#updateRate').val());
+    }
+    console.log('UPDATE RATE VALUE' + document.getElementById('updateRate').value);
+    clearTimeout(updating);
+    console.log('UPDATE RATE... -> ' + updateRate);
+    updating = setTimeout(function(){fetchData()}, updateRate * 1000);
+    console.log('FETCHING DATA...');
+    if ($('#batchSize').val() == '0') {
+        batchSize = '9999999999';
+    } else if ($('#batchSize').val() == '') {
+        batchSize = '1800';
+    } else {
+        batchSize = $('#batchSize').val();
+    }
+    console.log('batchsize is ' + batchSize);
 }
 
 function getSerialData() {
