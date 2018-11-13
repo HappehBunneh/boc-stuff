@@ -64,6 +64,7 @@ window.onload = function() {
     getDatabases();
     var updateRate = parseInt(document.getElementById('updateRate').value);
     updating = setTimeout(function(){fetchData()}, updateRate * 1000);
+    setInterval(function(){getSerialData()}, 1000);
 }
 
 function toggleDataSeries(e){
@@ -163,6 +164,12 @@ function fetchData() {
         updateData(data);
         now = new Date();
         console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
+    });
+}
+
+function getSerialData() {
+    $.post("../serial", {foo:'bar'}).done(function(response){
+        $('.output')[0].textContent = response;
     });
 }
 

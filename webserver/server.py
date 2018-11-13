@@ -59,6 +59,12 @@ def command():
         return str(results)
     else:
         return 'Dab'
+
+@app.route('/serial', methods = ['POST'])
+def command():
+    with open('/usr/bin/hym_buffer.txt', 'r') as f:
+        data = eval(f.read())[0]
+    return str(data)
 # run the application
 if __name__ == "__main__":  
     os.chdir('/home/pi/boc-stuff/webserver')
