@@ -213,8 +213,14 @@ function updateDatabase() {
 }
 
 function removeDatabase() {
-    $.post('../database', {query: 'DROP', measurement: $('.databases')[0].value, batchsize: 0}).done(function(data){
-        console.log(data);
+    $.ajax({
+        type: "POST",
+        url: "database",
+        data: JSON.stringify({query: 'DROP', measurement: $('.databases')[0].value, batchsize: 0}),
+        contentType: 'application/json', 
+        success: function(response){
+            console.log('dropped..');
+        }
     });
     getDatabases();
 }
