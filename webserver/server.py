@@ -34,7 +34,7 @@ def command():
     print request.json
     query = str(request.json['query'])
     measurement = str(request.json['measurement'])
-    batch = str(request.values.json['batchsize'])
+    batch = str(request.json['batchsize'])
     if query == 'DROP':
         client.drop_measurement(measurement)
         return 'Success'
