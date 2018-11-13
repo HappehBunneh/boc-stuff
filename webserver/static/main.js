@@ -141,7 +141,7 @@ function fetchData() {
         updateData(data);
     });
     updateRate = parseInt(document.getElementById('updateRate').value);
-    console.log('UPDATE RATE VALUE', document.getElementById('updateRate').value);
+    console.log('UPDATE RATE VALUE' + document.getElementById('updateRate').value);
     clearTimeout(updating);
     console.log('UPDATE RATE... -> ' + updateRate);
     updating = setTimeout(function(){fetchData()}, updateRate * 1000);
