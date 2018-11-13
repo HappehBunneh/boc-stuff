@@ -135,6 +135,15 @@ function updateData(data) {
 }
 
 function fetchData() {
+    if ($('#updateRate').val() == '') {
+        updateRate == 5;
+    } else {
+        updateRate = parseInt($('#updateRate').val());
+    }
+    console.log('UPDATE RATE VALUE' + document.getElementById('updateRate').value);
+    clearTimeout(updating);
+    console.log('UPDATE RATE... -> ' + updateRate);
+    updating = setTimeout(function(){fetchData()}, updateRate * 1000);
     console.log('FETCHING DATA...');
     if ($('#batchSize').val() == '0') {
         batchSize = '9999999999';
@@ -148,15 +157,6 @@ function fetchData() {
         data = eval(response);
         updateData(data);
     });
-    if ($('#updateRate').val() == '') {
-        updateRate == 5;
-    } else {
-        updateRate = parseInt($('#updateRate').val());
-    }
-    console.log('UPDATE RATE VALUE' + document.getElementById('updateRate').value);
-    clearTimeout(updating);
-    console.log('UPDATE RATE... -> ' + updateRate);
-    updating = setTimeout(function(){fetchData()}, updateRate * 1000);
 }
 
 function getDatabases() {
