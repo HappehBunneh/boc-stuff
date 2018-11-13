@@ -188,6 +188,23 @@ function getSerialData() {
     });
 }
 
+function refreshNow() {
+    $.ajax({
+        type:"POST", 
+        url: "database", 
+        data: JSON.stringify({query: 'SELECT', measurement: database, batchsize: batchSize}), 
+        contentType: 'application/json', 
+        success: function(response){
+            recieveAjax = new Date();
+            console.log('===============');
+            console.log(recieveAjax);
+            console.log('TOOK ' + (recieveAjax-sendAjax)/1000 + ' TO SEND AND RECIEVE DATA FROM BACKEND');
+            data = eval(response);
+            updateData(data);
+        }
+    });
+}
+
 function getDatabases() {
     $.ajax({
         type:"POST", 
