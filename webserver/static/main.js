@@ -166,8 +166,11 @@ function fetchData() {
         console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
     });*/
     $.ajax({url: "../database", data: {query: 'SELECT', measurement: database, batchsize: batchSize}, contentType: 'application/json', success: function(response){
+            then = new Date();
             data = eval(response);
             updateData(data);
+            now = new Date();
+            console.log('TOOK ' + (now-then)/1000 + ' TO PROCESS DATA AND RENDER CHART');
         }
     });
 }
