@@ -61,7 +61,7 @@ def command():
         return 'Dab'
 
 @app.route('/serial', methods = ['POST'])
-def command():
+def serial():
     with open('/usr/bin/hym_buffer.txt', 'r') as f:
         data = eval(f.read())[0]
     return str(data)
