@@ -165,7 +165,7 @@ if __name__ == '__main__':
             model = '150/200'
             break
         elif '60' in model:
-            model = '60'
+            model = 'OLD'
             break
         elif 'old' in model.lower():
             model = 'OLD'
