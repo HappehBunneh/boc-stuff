@@ -19,6 +19,5 @@ def readline():
 def main():
     while True:
         print  '\n\n\n'
-        print 
         data = readline().replace('\r\n', '').replace('\r\r', '').replace('\r', ' ')[:-1]
         print data
