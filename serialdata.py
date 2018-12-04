@@ -10,7 +10,7 @@ def readline():
         c = ser.read()
         if c:
             line += c
-            if line[-2:] in ['/r/r', '/r/n']:
+            if line[-2:] in ['\r\r', '\r\n']:
                 break
         else:
             break
@@ -19,7 +19,6 @@ def readline():
 def main():
     while True:
         print  '\n\n\n'
+        print 
         data = readline().replace('\r\n', '').replace('\r\r', '').replace('\r', ' ')[:-1]
         print data
-
-main()
