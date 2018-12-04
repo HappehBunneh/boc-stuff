@@ -4,14 +4,13 @@ import serial
 global ser
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 
-def readline(eol=b'\r\r'):
-    leneol = len(eol)
+def readline():
     line = bytearray()
     while True:
         c = ser.read(1)
         if c:
             line += c
-            if line[-leneol:] == eol:
+            if line[-2:] in ['/r/r', '/r/n']:
                 break
         else:
             break
@@ -20,7 +19,7 @@ def readline(eol=b'\r\r'):
 def main():
     while True:
         print  '\n\n\n'
-        data = readline(b'\r\n\r\n').replace('\r\n', '').replace('\r', ' ')[:-1]
+        data = readline().replace('\r\n', '').replace('\r\r', '').replace('\r', ' ')[:-1]
         print data
 
 main()
