@@ -168,7 +168,7 @@ if __name__ == '__main__':
             model = 'OLD'
             break
         elif 'old' in model.lower():
-            model = 'OLD'
+            model = 'VOLD'
             break
     serialNumber = raw_input('\nSpecify serial number : ')
     testReason = raw_input('\nPurpose of test : ')
