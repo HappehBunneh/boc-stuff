@@ -146,7 +146,7 @@ class Console():
         self.currentTime = datetime.now()
         self.startTime = self.currentTime
         raw_data = self.readline().replace('\r\n', '').replace('\r\r', '').replace('\r', ' ')[:-1]
-        raw_data = [i for i in raw_data.split(' ') if i != '']
+        raw_data = [i for i in raw_data.split(' ') if i not in ['', '\x00']]
         print raw_data
         while True:
             try:
