@@ -138,6 +138,7 @@ class Console():
         print 'serial started...'
 
     def run(self):
+        data = self.getData()
         print 'writing os variables'
         os.environ['running'] = 'True'
         os.environ['filename'] = self.fileName
