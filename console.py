@@ -31,14 +31,13 @@ class Console():
         self.client.switch_database('test')
         self.maxprint = maxprint.Print(self.data, self.dataVariables + self.additionalVariables)
 
-    def readline(self, eol=b'\r\r'):
-        leneol = len(eol)
+    def readline(self):
         line = bytearray()
         while True:
-            c = self.serial.read(1)
+            c = self.serial.read()
             if c:
                 line += c
-                if line[-leneol:] == eol:
+                if line[-2:] in ['\r\r', '\r\n']:
                     break
             else:
                 break
@@ -48,10 +47,11 @@ class Console():
         self.currentTime = datetime.now()
         days, seconds = (self.currentTime - self.startTime).days, (self.currentTime - self.startTime).seconds
         self.time_elapsed = str((days * 24) + round((float(seconds) / 3600), 3))
-        if self.model == '150/200':
-            raw_data = self.readline(b'\r\n\r\n').replace('\r\n', '').replace('\r', ' ')[:-1]
-        else:
-            raw_data = self.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
+        #if self.model == '150/200':
+        #    raw_data = self.readline(b'\r\n\r\n').replace('\r\n', '').replace('\r', ' ')[:-1]
+        #else:
+        #    raw_data = self.readline().replace('\r\n', '').replace('\r', ' ')[:-1]
+        raw_data = self.readline().replace('\r\n', '').replace('\r\r', '').replace('\r', ' ')[:-1]
         if raw_data == '':
             return [False]
         else:
