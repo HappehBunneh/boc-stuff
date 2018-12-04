@@ -150,7 +150,7 @@ class Console():
             try:
                 data = self.getData()
                 if data[0]:
-                    os.system('clear')
+                    #os.system('clear')
                     self.saveData(data)
                     self.displayData()
             except (KeyboardInterrupt, SystemExit):
