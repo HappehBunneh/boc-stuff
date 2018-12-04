@@ -7,7 +7,7 @@ ser = serial.Serial('/dev/ttyUSB0', 9600)
 def readline():
     line = bytearray()
     while True:
-        c = ser.read(1)
+        c = ser.read()
         if c:
             line += c
             if line[-2:] in ['/r/r', '/r/n']:
