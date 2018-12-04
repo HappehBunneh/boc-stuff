@@ -21,3 +21,5 @@ def main():
         print  '\n\n\n'
         data = readline().replace('\r\n', '').replace('\r\r', '').replace('\r', ' ')[:-1]
         print data
+
+main()
