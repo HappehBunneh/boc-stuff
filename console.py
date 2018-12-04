@@ -138,7 +138,6 @@ class Console():
         print 'serial started...'
 
     def run(self):
-        data = self.getData()
         print 'writing os variables'
         os.environ['running'] = 'True'
         os.environ['filename'] = self.fileName
@@ -146,6 +145,7 @@ class Console():
         self.startReadingPort()
         self.currentTime = datetime.now()
         self.startTime = self.currentTime
+        data = self.getData()
         while True:
             try:
                 data = self.getData()
