@@ -145,7 +145,7 @@ class Console():
         self.startReadingPort()
         self.currentTime = datetime.now()
         self.startTime = self.currentTime
-        data = self.getData()
+        self.readline().replace('\r\n', '').replace('\r\r', '').replace('\r', ' ')[:-1]
         while True:
             try:
                 data = self.getData()
