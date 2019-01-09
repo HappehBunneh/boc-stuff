@@ -131,8 +131,8 @@ function updateData(data) {
     console.log(mainChart.data[0]);
     mainChart.options.data[0].dataPoints = currentData;
     mainChart.options.data[1].dataPoints = voltageData;
-    mainChart.options.data[2].dataPoints = powerData;
-    mainChart.options.data[3].dataPoints = tempData;
+    mainChart.options.data[2].dataPoints = tempData;
+    mainChart.options.data[3].dataPoints = powerData;
     mainChart.render();
 }
 
