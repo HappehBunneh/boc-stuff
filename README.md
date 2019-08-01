@@ -1,6 +1,6 @@
 # boc-stuff
 ## Dataplicity Usage
-Login in..
+Log in..
 - `cd home/pi; su pi`
 
 ## Setup 
