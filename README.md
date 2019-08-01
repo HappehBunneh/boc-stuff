@@ -6,7 +6,7 @@ Log in..
 ## Setup 
 - `git clone https://github.com/happehbunneh/boc-stuff`
 - `cd boc-stuff`
-- `sudo python setup.py`
+- `sudo python setup.py` (be aware for any prompts asking for confirmation, just type Y and press enter)
 - `sudo reboot`
 
 ## Console Commands
