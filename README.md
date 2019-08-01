@@ -20,9 +20,9 @@ hello
 
 You'll be asked for the specified model number, serial number, and reason for test. Remember this as this will be used as the name for the databse correlated to the serial data. 
 
--Input for Model Number = 150, 200, or VOLD
--Input for Serial Number = * (whatever you wish)
--Input for Reason = *
+- Input for Model Number = 150, 200, or VOLD
+- Input for Serial Number = * (whatever you wish)
+- Input for Reason = *
 
 Afterwards a detailed version of the data will be shown and refreshed every second. Please keep this running in the background.
 
