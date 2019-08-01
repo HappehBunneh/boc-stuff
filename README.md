@@ -1,5 +1,7 @@
 # boc-stuff
-hello
+## Dataplicity Usage
+Login in..
+- `cd home/pi; su pi`
 
 ## Setup 
 - `git clone https://github.com/happehbunneh/boc-stuff`
