@@ -156,7 +156,8 @@ class Console():
                     self.saveData(data)
                     self.displayData()
             except (KeyboardInterrupt, SystemExit):
-                self.close()         
+                pass
+                #self.close()         
 
 if __name__ == '__main__':
     with open('/usr/bin/hym_config.yaml', 'r') as f:
