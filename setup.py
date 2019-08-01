@@ -31,6 +31,7 @@ client.close()
 print 'INFLUX CONFIGURED'
 print 'CREATING EXECUTABLES'
 os.system('chmod +x '+cwd+'/serialdata.py')
+os.system('chmod +x '+cwd+'/displaydata.py')
 os.system('sudo chmod +x '+cwd+'/console.py')
 os.system('chmod +x '+cwd+'/switch.py')
 os.system('chmod +x '+cwd+'/webserver/server.py')
@@ -39,6 +40,7 @@ print 'CREATING SYMLINKS'
 os.system('sudo ln -s '+cwd+'/webserver/server.py /usr/bin/server.py')
 os.system('sudo ln -s '+cwd+'/switch.py /usr/bin/hym_on.py')
 os.system('sudo ln -s '+cwd+'/console.py /usr/bin/hym_mon.py')
+os.system('sudo ln -s '+cwd+'/serialdata.py /usr/bin/displaydata.py')
 os.system('sudo ln -s '+cwd+'/serialdata.py /usr/bin/serialdata.py')
 os.system('sudo ln -s '+cwd+'/config.yaml /usr/bin/hym_config.yaml')
 os.system('sudo ln -s '+cwd+'/buffer.txt /usr/bin/hym_buffer.txt')
