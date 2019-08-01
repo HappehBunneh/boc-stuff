@@ -36,8 +36,12 @@ How to Update Model Types:
 
 Please add the new structure under 'dataVariables'
 
-`dataVariables:
+```
+dataVariables:
   NEWVERSION:
     - VARIABLE_1
     - VARIABLE_2
-    ...`
+    ...
+  150/200:
+    ...
+```
