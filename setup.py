@@ -27,7 +27,7 @@ print 'CONFIGURING INFLUX'
 from influxdb import InfluxDBClient
 client = InfluxDBClient(host='localhost', port=8086)
 client.create_database('test')
-client.close()
+#client.close()
 print 'INFLUX CONFIGURED'
 print 'CREATING EXECUTABLES'
 os.system('chmod +x '+cwd+'/serialdata.py')
