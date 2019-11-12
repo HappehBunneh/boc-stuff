@@ -22,7 +22,7 @@ Log in..
 
 You'll be asked for the specified model number, serial number, and reason for test. Remember this as this will be used as the name for the databse correlated to the serial data. 
 
-- Input for Model Number = 150, 200, or VOLD
+- Input for Model Number = 60, 150, 200, OLD or VOLD
 - Input for Serial Number = * (whatever you wish)
 - Input for Reason = *
 
@@ -47,3 +47,8 @@ dataVariables:
   150/200:
     ...
 ```
+
+## Error
+- console.py
+  - `influxdb.exceptions.InfluxDBServerError: {"error":"timeout"}` : influxdb has not responded
+    - fix : `sudo pkill -f influxd; sudo nohup influxd &`
