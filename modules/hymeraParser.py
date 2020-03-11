@@ -2,6 +2,7 @@
 import sys
 import os
 import time
+from serialMonitor import serialMonitor
 
 class hymeraParser():
 	def __init__(self):
@@ -10,25 +11,41 @@ class hymeraParser():
 
 	def parse(self, data):
 		self.raw_data = data
-		self.split_data = self.raw_data.split(" ")
-		self.temperature = self.split_data[2]
-		self.voltage = self.split_data[0]
-		self.current = self.split_data[1]
-		current = [i for i in self.split_data if "A" in i][2]
-		voltages = [i for i in self.split_data if "V" in i]
-		voltage_current_pairs = [[self.split_data[i].replace("V", ""), self.split_data[i+1].replace("A", "")] for i in range(len(self.split_data)-1) if self.split_data[i][-1] == "V" and self.split_data[i+1][-1] == "A"]
-		if len(voltages) in [5,6]:
-			voltage = voltages[2]
-		elif len(voltages) == 7:
-			voltage = voltages[6]
-		self.power = float(voltage_current_pairs[1][0])*float(voltage_current_pairs[1][1])
-		csv = ",".join(self.split_data)
-		self.json = {"csv": csv, "data": {"STACK_V": self.voltage, "STACK_I": self.current, "OUTPUT_POWER": self.power, "STACK_TEMP": self.temperature}}
+		self.split_data = [i for i in self.raw_data.split(" ") if len(i) != 0]
+		voltage_current_pairs = []
+		for i in range(len(self.split_data) - 1):
+			if self.split_data[i][-1] == "V" and self.split_data[i+1][-1] == "A":
+				voltage_current_pairs.append([float(self.split_data[i].replace("V", "")), float(self.split_data[i+1].replace("A", ""))])
+		self.stack_voltage = voltage_current_pairs[0][0]
+		self.stack_current = voltage_current_pairs[0][1]
+		self.stack_power = round((self.stack_voltage*self.stack_current), 1)
+		self.output_power = round((voltage_current_pairs[2][0]*voltage_current_pairs[2][1]), 1)
+		self.stack_temperature = float(self.split_data[2].replace("+","").replace("C",""))
+		self.ambient_temperature = float(self.split_data[3].replace("+","").replace("C",""))
+		self.json = {
+				"data":
+					{
+						"STACK_V": self.stack_voltage,
+						"STACK_I": self.stack_current,
+						"STACK_POWER": self.stack_power,
+						"OUTPUT_POWER": self.output_power,
+						"STACK_TEMP": self.stack_temperature,
+						"AMBIENT_TEMP": self.ambient_temperature
+					},
+				"csv": ",".join(self.split_data)}
 		return self.json
 
 if __name__ == "__main__":
-	testStr = "18.57V 00.0A 011.6C 009.8C 13.03V 0000A 1B 0B 0000 00.0C 3328 00.09V 00.0A 3998 25.20V 28.00V 0001m 0001m 0119 042d 28.00V 0000 00.00V 0000 2014/04/15 06:16:12 3106 01 1975 001 00000413 00 7200"
+	ser = serialMonitor('/dev/ttyUSB0', 9600)
 	parser = hymeraParser()
-	data = parser.parse(testStr)
-	print(data["data"])
-	print(data["csv"])
+	try:
+		ser.readline()
+	except:
+		pass
+	while True:
+		print("\n\n\n")
+		data = ser.readline()
+		parsed = parser.parse(data)
+		print(data)
+		print(parsed["data"])
+		time.sleep(1)

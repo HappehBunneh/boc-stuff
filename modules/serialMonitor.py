@@ -14,7 +14,8 @@ class serialMonitor():
 		os.environ["PORT_OPEN"] = 'TRUE'
 
 	def openPort(self):
-		self.serial.open()
+		if not (self.serial.is_open):
+			self.serial.open()
 		os.environ["PORT_OPEN"] = 'TRUE'
 		return True
 
@@ -27,15 +28,15 @@ class serialMonitor():
 		if (self.serial.is_open):
 			line = bytearray()
 			while True:
-				c = self.serial.read()
+				c = self.serial.read(1)
 				if c:
 					line += c
-					if line[-2:] in ['\r\r', '\r\n']:
+					if line[-4:] ==  b'\r\n\r\n':
 						break
 				else:
 					break
-		self.data = bytes(line)
-		self.data = str(self.data.replace("\r", " "))
+		self.data = bytes(line).replace(b"\r\n\r\n", b"").replace(b"\r", b" ")
+		self.data = self.data.decode("utf-8")
 		self.writeSerialBuffer()
 		return self.data
 
@@ -47,7 +48,12 @@ class serialMonitor():
 		return os.environ["SERIALBUFFER"]
 
 if __name__ == '__main__':
-	ser = serialMonitor(port, baudrate).openPort()
+	ser = serialMonitor("/dev/ttyUSB0", 9600)
+	#Throw away first exception
+	try:
+		ser.readline()
+	except:
+		pass
 	while True:
 		print('\n\n\n')
 		print(ser.readline())
