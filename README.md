@@ -1,4 +1,4 @@
-# boc-stuff
+# Hymera Monitoring Station
 ## Dataplicity Usage
 Log in..
 - `cd home/pi; su pi`
@@ -10,15 +10,13 @@ Log in..
 - `sudo reboot`
 
 ## Console Commands
-- `hym_mon.py` - starts the monitoring service 
-- `hym_on.py` - switches on/off the Hymera Unit
-- `server.py` - starts MaxTerm running locally
-- `displaydata.py` - shows data of monitoring service currently running (if any)
-- `serialdata.py` - shows rar incoming serial data
+- `console.py` - starts the monitoring service 
+- `switch.py` - switches on/off the Hymera Unit
+- `modules/serialMonitor.py` - displaying incoming data
 
 
 ## Console/Monitoring Serivce Usage 
-`hym_mon.py`
+`console.py`
 
 You'll be asked for the specified model number, serial number, and reason for test. Remember this as this will be used as the name for the databse correlated to the serial data. 
 
@@ -26,29 +24,9 @@ You'll be asked for the specified model number, serial number, and reason for te
 - Input for Serial Number = * (whatever you wish)
 - Input for Reason = *
 
-Afterwards a detailed version of the data will be shown and refreshed every second. Please keep this running in the background.
+Afterwards, data that is sent from the hymera will be shown on the screen, refreshed at every second. Please keep this running in the background. 
 
-## MaxTerm Usage
-- Select the correct database and click 'Select Database'
-- Leave or Change the 'Update Interval' and 'Batch Size' (update interval is the interval used to retrieve the data, batch size is how much data should be retrieved) 
+Before start, it will check if there is any service currently running, if so, it will ask whether you want to terminate the existing service and create a new one. If "yes", a new service is initialised, otherwise output from the existing service is shown on screen.
 
-
-How to Update Model Types:
-`config.yaml` is where the model types and their variables are stored. If there has been a significant change in data structure please update the config to include a new model and its data structure.. use a similar format to this:
-
-Please add the new structure under 'dataVariables'
-
-```
-dataVariables:
-  NEWVERSION:
-    - VARIABLE_1
-    - VARIABLE_2
-    ...
-  150/200:
-    ...
-```
-
-## Error
-- console.py
-  - `influxdb.exceptions.InfluxDBServerError: {"error":"timeout"}` : influxdb has not responded
-    - fix : `sudo pkill -f influxd; sudo nohup influxd &`
+## Grafana Usage
+- You can access Grafana through the dataplicity wormhole
