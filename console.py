@@ -19,7 +19,7 @@ class Console():
 		self.fileName = model+"_"+serialNumber+"_"+testReason.replace(" ", "_")+"_"+now.strftime("%m~%d~%Y_%H:%M:%S")
 		self.fileWriter = csvWriter(self.fileName)
 		self.serialMonitor = serialMonitor("/dev/ttyUSB0", 9600, self.fileName)
-		self.influx = influxManager("test", self.fileName)
+		self.influx = influxManager("hymera", self.fileName)
 		self.parser = hymeraParser()
 		atexit.register(self.close)
 		self.writePID()

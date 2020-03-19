@@ -3,6 +3,7 @@ import requests
 
 STATUS_FILE = "/var/lib/hymera/status"
 TEMPLATE_FILE = "/var/lib/hymera/template.json"
+KEY_FILE = "/var/lib/hymera/secret"
 
 class grafanaApi():
 
@@ -14,6 +15,9 @@ class grafanaApi():
 		with open(STATUS_FILE) as f:
 			name = f.read()
 
+		with open(KEY_FILE) as f:
+			AUTH_KEY = f.read()
+
 		dashboard["title"] = name
 		dashboard["panels"][0]["title"] = name
 		dashboard["panels"][0]["measurement"] = name
@@ -22,7 +26,6 @@ class grafanaApi():
 		dashboard["uid"] = None
 		dashboard["isHome"] = True
 		payload = {"dashboard": dashboard, "folderId": 15}
-		AUTH_KEY = "eyJrIjoiejdvM0JMQmFmeVBBZFVuTnlQdW1mSXlkcjA5ZTJtcEQiLCJuIjoiUHl0aG9uIiwiaWQiOjJ9"
 		headers = {"Accept": "application/json",
 				"Content-Type": "application/json",
 				"Authorization" : "Bearer {0}".format(AUTH_KEY)}
