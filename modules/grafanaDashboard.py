@@ -3,6 +3,7 @@ import requests
 
 STATUS_FILE = "/var/lib/hymera/status"
 TEMPLATE_FILE = "/var/lib/hymera/template.json"
+
 class grafanaApi():
 
 	@staticmethod
