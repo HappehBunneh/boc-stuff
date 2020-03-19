@@ -5,25 +5,35 @@ from modules.serialMonitor import serialMonitor
 from modules.influxManager import influxManager
 from modules.hymeraParser import hymeraParser
 from datetime import datetime
+from modules.grafanaDashboard import grafanaApi
 import atexit
+import psutil
+
+STATUS_FILE = "/var/lib/hymera/status"
+BUFFER_FILE = "/var/lib/hymera/buffer"
+PID_FILE = "/var/lib/hymera/PID"
 
 class Console():
     def __init__(self, serialNumber, model, testReason):
         now = datetime.now()
-        self.fileName = model+"_"+serialNumber+"_"+testReason.replace(" ", "_")+"_"+now.strftime("%m/%d/%Y_%H:%M:%S")
+        self.fileName = model+"_"+serialNumber+"_"+testReason.replace(" ", "_")+"_"+now.strftime("%m~%d~%Y_%H:%M:%S")
         self.fileWriter = csvWriter(self.fileName)
-        self.serialMonitor = serialMonitor()
+        self.serialMonitor = serialMonitor("/dev/ttyUSB0", 9600, self.fileName)
         self.influx = influxManager("test", self.fileName)
-        self.parser.parse = hymeraParser()
+        self.parser = hymeraParser()
         atexit.register(self.close)
-        os.environ["CONSOLE_RUNNING"] = "TRUE"
+        self.writePID()
 
     def close(self):
-        os.environ["CONSOLE_RUNNING"] = "FALSE"
+        self.clearPID()
         exit()
 
     def run(self):
-        self.serialMonitor.open()
+        grafanaApi.createDashboard()
+        try:
+                self.serialMonitor.readline()
+        except:
+                pass
         while True:
             data = self.serialMonitor.readline()
             print("\n\n\n", data)
@@ -31,10 +41,52 @@ class Console():
             self.fileWriter.writeToFile(parsedJson["csv"])
             self.influx.write_points(parsedJson["data"])
 
+    def writePID(self):
+        with open(PID_FILE, "w") as file:
+            file.write(str(os.getpid()))
+
+    @staticmethod
+    def clearPID():
+        with open(PID_FILE, "w") as file:
+            pass
+
+    @staticmethod
+    def isSerialRunning():
+        with open(STATUS_FILE) as file:
+            if file.read() == "1":
+                return True
+            else:
+                return False
+
+    @staticmethod
+    def isConsoleRunning():
+         with open(STATUS_FILE) as file:
+             if len(file.read()) > 1 and file.read(1) != "1":
+                 return True
+             else:
+                 return False
+
+    @staticmethod
+    def killSelf():
+        with open(PID_FILE) as file:
+            psutil.Process(int(file.read())).terminate()
+        Console.clearPID()
+        with open(STATUS_FILE, "w") as file:
+            pass
+
 if __name__ == "__main__":
-    if "CONSOLE_RUNNING" in os.environ:
-        if os.environ["CONSOLE_RUNNING"] == "TRUE":
-            print("There is currently a process running...")
+    if Console.isSerialRunning():
+        term = input("There is currently a serial monitor process running and no console process, create one? ")
+        if term.lower()[0] == "y":
+             Console.killSelf()
+        else:
+             serialMonitor.continousRead()
+    if Console.isConsoleRunning():
+        term = input("There is currently a console running, terminate the process? ")
+        if term.lower()[0] == "y":
+             Console.killSelf()
+        else:
+             serialMonitor.continousRead()
     model = input("Specify model type: ")
     serialNumber = input("Specify serial number: ")
     testReason = input("Purpose of test: ")

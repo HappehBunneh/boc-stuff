@@ -2,10 +2,14 @@
 import os
 import sys
 
+FILE_LOCATION = "/var/log/hymera/"
+
 class csvWriter():
     def __init__(self, fileName):
-        self.file = fileName
-        os.environ["FILENAME"] = fileName
+        self.file = FILE_LOCATION + fileName
+        os.environ["FILENAME"] = FILE_LOCATION + fileName
+        with open(self.file, "w") as f:
+            pass
 
     def writeToFile(self, dataToWrite):
         with open(self.file, "a") as f:
