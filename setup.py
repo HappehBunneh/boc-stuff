@@ -10,8 +10,9 @@ This script installs influxDB and grafana, as well as creating necessary directo
 with "appropriate" permissions
 '''
 
-os.system("sudo apt -y update")
-os.system("sudo apt -y upgrade")
+os.system("sudo apt-get -y update")
+os.system("sudo apt-get -y upgrade")
+os.system("sudo apt-get -y install python3-pip")
 #python3 requirements
 subprocess.check_call([sys.executable, "-m", "pip3", "install", "psutil"])
 subprocess.check_call([sys.executable, "-m", "pip3", "install", "requests"])
@@ -26,8 +27,8 @@ for i in stuff:
             os.system('echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list')
         else:
             os.system('echo "deb https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list')
-os.system("sudo apt update")
-os.system("sudo apt -y install influxdb")
+os.system("sudo apt-get update")
+os.system("sudo apt-get -y install influxdb")
 os.system("sudo systemctl unmask influxdb")
 os.system("sudo systemctl enable influxdb")
 os.system("sudo systemctl start influxdb")
