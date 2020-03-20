@@ -69,7 +69,7 @@ os.system("curl -X POST http://admin:admin@localhost:80/api/user/using/1")
 headers = {"Content-Type": "application/json"}
 payload = {"name": "python", "role": "Admin"}
 p =  requests.post("http://admin:admin@localhost:80/api/auth/keys", headers=headers, json=payload)
-print(p)
+print(p.json())
 key = p.json()["key"]
 with open("/var/lib/hymera/secret", "w") as f:
     f.write(key)
