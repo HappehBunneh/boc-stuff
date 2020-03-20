@@ -40,10 +40,6 @@ from influxdb import InfluxDBClient
 client = InfluxDBClient(host="localhost", port=8086)
 client.create_database("hymera")
 os.system("sudo apt -y install grafana")
-os.system("sudo systemctl daemon-reload")
-os.system("sudo systemctl enable grafana_server")
-os.system("sudo setcap 'cap_net_bind_service=+ep' /usr/bin/grafana")
-#edit grafana config to run on port :80
 with open("/etc/grafana/grafana.ini") as f:
     data = f.readlines()
 for i in range(len(data)):
@@ -53,6 +49,9 @@ for i in range(len(data)):
 with open("/etc/grafana/grafana.ini", "w") as f:
     for i in data:
         f.write(i)
+os.system("sudo setcap 'cap_net_bind_service=+ep' /usr/bin/grafana")
+os.system("sudo systemctl daemon-reload")
+os.system("sudo systemctl enable grafana_server")
 os.system("sudo systemctl start grafana_sever")
 os.system("sudo mkdir /var/lib/hymera")
 os.system("sudo mkdir /var/log/hymera")
