@@ -32,8 +32,10 @@ os.system("sudo apt -y install influxdb")
 os.system("sudo systemctl unmask influxdb")
 os.system("sudo systemctl enable influxdb")
 os.system("sudo systemctl start influxdb")
-print("Started")
-exit()
+while True:
+    if os.popen("curl -sL -I localhost:8086").read() != "":
+        break
+print("Configuring database")
 from influxdb import InfluxDBClient
 client = InfluxDBClient(host="localhost", port=8086)
 client.create_database("hymera")
