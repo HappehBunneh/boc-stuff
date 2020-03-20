@@ -14,9 +14,9 @@ os.system("sudo apt-get -y update")
 os.system("sudo apt-get -y upgrade")
 os.system("sudo apt-get -y install python3-pip")
 #python3 requirements
-subprocess.check_call([sys.executable, "-m", "pip3", "install", "psutil"])
-subprocess.check_call([sys.executable, "-m", "pip3", "install", "requests"])
-subprocess.check_call([sys.executable, "-m", "pip3", "install", "influxdb"])
+subprocess.check_call([sys.executable, "-m", "pip", "install", "psutil"])
+subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
+subprocess.check_call([sys.executable, "-m", "pip", "install", "influxdb"])
 os.system("wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -")
 #make check
 with open("/etc/os-release") as f:
