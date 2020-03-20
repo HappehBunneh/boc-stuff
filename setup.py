@@ -39,8 +39,8 @@ print("Configuring database")
 from influxdb import InfluxDBClient
 client = InfluxDBClient(host="localhost", port=8086)
 client.create_database("hymera")
-os.system("wget https://dl.grafana.com/oss/release/grafana_6.6.1_armhf.deb")
-os.system("sudo dpkg -i grafana_6.6.1_armhf.deb")
+os.system("sudo apt -y install grafana")
+os.system("sudo systemctl daemon-reload")
 os.system("sudo systemctl enable grafana_server")
 #edit grafana config to run on port :80
 with open("/etc/grafana/grafana.ini") as f:
