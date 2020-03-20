@@ -2,6 +2,7 @@
 import os
 import subprocess
 import time
+import sys
 cwd = os.getcwd()
 
 '''
@@ -12,9 +13,9 @@ with "appropriate" permissions
 os.system("sudo apt update")
 os.system("sudo apt upgrade")
 #python3 requirements
-os.system("sudo pip3 install psutil")
-os.system("sudo pip3 install requests")
-os.system("sudo pip3 install influxdb")
+subprocess.check_call([sys.executable, "-m", "pip", "install", "psutil"])
+subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
+subprocess.check_call([sys.executable, "-m", "pip", "install", "influxdb"])
 os.system("wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -")
 #make check
 with open("/etc/os-release") as f:
@@ -54,8 +55,6 @@ os.system("sudo chmod 666 /var/log/hymera")
 os.system("touch /var/lib/hymera/status")
 os.system("touch /var/lib/hymera/buffer")
 os.system("touch /var/lib/hymera/PID")
-#get grafana api_key DONE
-#create grafana datasource DONE
 #create grafana home dashboard *doing*
 #move grafana dashboard template to /var/lib/hymera/template.json
 import requests
