@@ -57,13 +57,11 @@ os.system("sudo systemctl enable grafana-server")
 os.system("sudo systemctl start grafana-server")
 os.system("sudo mkdir /var/lib/hymera")
 os.system("sudo mkdir /var/log/hymera")
-os.system("sudo chmod 666 /var/lib/hymera")
-os.system("sudo chmod 666 /var/log/hymera")
+os.system("sudo chmod 777 /var/lib/hymera")
+os.system("sudo chmod 777 /var/log/hymera")
 os.system("touch /var/lib/hymera/status")
 os.system("touch /var/lib/hymera/buffer")
 os.system("touch /var/lib/hymera/PID")
-#create grafana home dashboard *doing*
-#move grafana dashboard template to /var/lib/hymera/template.json
 import requests
 os.system("curl -X POST http://admin:admin@localhost:80/api/user/using/1")
 headers = {"Content-Type": "application/json"}
@@ -86,3 +84,10 @@ payload = {
     "database": "hymera"
 }
 p = requests.post("http://localhost:80/api/datasources", headers=headers, json=payload)
+payload = {
+    "title": "Logs"
+}
+p = requests.post("http://localhost:80/api/folders", headers=headers, json=payload)
+print(p.json())
+#create home dashboard
+#template dashboard
