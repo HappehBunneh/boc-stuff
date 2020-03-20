@@ -51,13 +51,11 @@ for i in range(len(data)):
 with open("/etc/grafana/grafana.ini", "w") as f:
     for i in data:
         f.write(i)
-os.system("sudo setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana")
+os.system("sudo setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana-server")
 os.system("sudo systemctl daemon-reload")
 os.system("sudo systemctl enable grafana-server")
 os.system("sudo systemctl start grafana-server")
-os.system("sudo systemctl stop grafana-server")
-time.sleep(5)
-os.system("sudo systemctl start grafana-server")
+exit()
 os.system("sudo mkdir /var/lib/hymera")
 os.system("sudo mkdir /var/log/hymera")
 os.system("sudo chmod 666 /var/lib/hymera")
