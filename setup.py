@@ -80,7 +80,7 @@ payload = {
     "type":"influxdb",
     "url":"http://localhost:8086",
     "access":"proxy",
-    "basicAuth":false,
-    isDefault:true
+    "basicAuth": False,
+    "isDefault": True
 }
 p = requests.post("http://localhost:80/api/datasources", headers=headers, json=payload)
