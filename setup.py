@@ -42,6 +42,7 @@ client.create_database("hymera")
 os.system("sudo apt -y install grafana")
 os.system("sudo systemctl daemon-reload")
 os.system("sudo systemctl enable grafana_server")
+os.system("sudo setcap 'cap_net_bind_service=+ep' /usr/bin/grafana")
 #edit grafana config to run on port :80
 with open("/etc/grafana/grafana.ini") as f:
     data = f.readlines()
