@@ -82,6 +82,7 @@ payload = {
     "url":"http://localhost:8086",
     "access":"proxy",
     "basicAuth": False,
-    "isDefault": True
+    "isDefault": True,
+    "database": "hymera"
 }
 p = requests.post("http://localhost:80/api/datasources", headers=headers, json=payload)
