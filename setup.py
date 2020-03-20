@@ -10,8 +10,8 @@ This script installs influxDB and grafana, as well as creating necessary directo
 with "appropriate" permissions
 '''
 
-os.system("sudo apt update")
-os.system("sudo apt upgrade")
+os.system("sudo apt -y update")
+os.system("sudo apt -y upgrade")
 #python3 requirements
 subprocess.check_call([sys.executable, "-m", "pip", "install", "psutil"])
 subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
