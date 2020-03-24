@@ -17,6 +17,7 @@ os.system("sudo apt -y install python3-pip")
 subprocess.check_call([sys.executable, "-m", "pip", "install", "psutil"])
 subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
 subprocess.check_call([sys.executable, "-m", "pip", "install", "influxdb"])
+subprocess.check_call([sys.executable, "-m", "pip", "install", "pyserial"])
 os.system("wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -")
 #make check
 with open("/etc/os-release") as f:
@@ -124,11 +125,10 @@ payload = {
 	"overwrite": True
 }
 update = requests.post("http://localhost:80/api/dashboards/db", headers=headers, json=payload)
-print(update.json())
 payload = {
 	"theme": "",
 	"homeDashboardId": update.json()["id"],
 	"timezone": "utc"
 }
 updateHome = requests.put("http://localhost:80/api/org/preferences", headers=headers, json=payload)
-print(updateHome.json())
+print("Setup done")
