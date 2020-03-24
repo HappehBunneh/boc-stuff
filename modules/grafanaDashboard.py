@@ -30,7 +30,7 @@ class grafanaApi():
 		dashboard["id"] = None
 		dashboard["uid"] = None
 		dashboard["isHome"] = True
-		payload = {"dashboard": dashboard, "folderId": 15}
+		payload = {"dashboard": dashboard, "folderId": folderId}
 		headers = {"Accept": "application/json",
 				"Content-Type": "application/json",
 				"Authorization" : "Bearer {0}".format(AUTH_KEY)}

@@ -92,7 +92,7 @@ payload = {
 p = requests.post("http://localhost:80/api/folders", headers=headers, json=payload)
 folderId = p.json()["id"]
 with open("/var/lib/hymera/folder", "w") as f:
-	f.write(folderId)
+	f.write(str(folderId))
 home = requests.get("http://localhost:80/api/dashboards/home", headers=headers)
 dashboard =  home.json()["dashboard"]
 dashboard["panels"] =  [{
