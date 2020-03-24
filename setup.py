@@ -62,6 +62,7 @@ os.system("sudo chmod 777 /var/log/hymera")
 os.system("touch /var/lib/hymera/status")
 os.system("touch /var/lib/hymera/buffer")
 os.system("touch /var/lib/hymera/PID")
+time.sleep(3)
 import requests
 os.system("curl -X POST http://admin:admin@localhost:80/api/user/using/1")
 headers = {"Content-Type": "application/json"}
@@ -119,6 +120,7 @@ payload = {
     "dashboard": dashboard,
     "overwrite": True
 }
-update = requests.post("http://localhost:80/api/dashboards/dp", headers=headers, json=payload)
+update = requests.post("http://localhost:80/api/dashboards/db", headers=headers, json=payload)
+print(update.json())
 #create home dashboard
 #template dashboard
