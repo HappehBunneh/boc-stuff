@@ -5,6 +5,7 @@ import requests
 STATUS_FILE = "/var/lib/hymera/status"
 TEMPLATE_FILE = "/var/lib/hymera/template.json"
 KEY_FILE = "/var/lib/hymera/secret"
+FOLDER_ID = "/var/lib/hymera/folder"
 
 class grafanaApi():
 
@@ -15,6 +16,9 @@ class grafanaApi():
 
 		with open(STATUS_FILE) as f:
 			name = f.read()
+
+		with open(FOLDER_ID) as f:
+			folderId = f.read()
 
 		with open(KEY_FILE) as f:
 			AUTH_KEY = f.read()
