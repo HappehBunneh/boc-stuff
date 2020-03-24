@@ -89,5 +89,36 @@ payload = {
 }
 p = requests.post("http://localhost:80/api/folders", headers=headers, json=payload)
 print(p.json())
+home = requests.get("http://localhost:80/api/dashboards/home", headers=headers)
+dashboard =  home.json()["dashboard"]
+dashboard["panels"] =  [{
+    "datasource": None,
+    "folderId": p.json()["id"],
+    "gridPos": {
+        "h": 34,
+        "w": 24,
+        "x": 0,
+        "y": 0
+    },
+    "headings": True,
+    "id": 2,
+    "limit": 50,
+    "options": {},
+    "query": "",
+    "recent": True,
+    "search": True,
+    "starred": False,
+    "tags": [],
+    "timeFrom": None,
+    "timeShift": None,
+    "title": "Hymera Logs",
+    "type": "dashlist"
+    }
+]
+payload = {
+    "dashboard": dashboard,
+    "overwrite": True
+}
+update = requests.post("http://localhost:80/api/dashboards/dp", headers=headers, json=payload)
 #create home dashboard
 #template dashboard
