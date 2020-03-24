@@ -127,7 +127,7 @@ update = requests.post("http://localhost:80/api/dashboards/db", headers=headers,
 print(update.json())
 payload = {
 	"theme": "",
-	"homeDashboardId": update.json()["id"]
+	"homeDashboardId": update.json()["id"],
 	"timezone": "utc"
 }
 updateHome = requests.put("http://localhost:80/api/org/preferences", headers=headers, json=payload)
