@@ -62,7 +62,7 @@ os.system("sudo chmod 777 /var/log/hymera")
 os.system("touch /var/lib/hymera/status")
 os.system("touch /var/lib/hymera/buffer")
 os.system("touch /var/lib/hymera/PID")
-os.system("mv {0} /var/lib/hymera/template.json".format(cwd+"/template.json")
+os.system("mv {0} /var/lib/hymera/template.json".format(cwd+"/template.json"))
 time.sleep(3)
 import requests
 os.system("curl -X POST http://admin:admin@localhost:80/api/user/using/1")
