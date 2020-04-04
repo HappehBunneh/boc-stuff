@@ -20,8 +20,8 @@ Log in..
 
 You'll be asked for the specified model number, serial number, and reason for test. Remember this as this will be used as the name for the databse correlated to the serial data. 
 
-- Input for Model Number = 60, 150, 200, OLD or VOLD
-- Input for Serial Number = * (whatever you wish)
+- Input for Model Number = *
+- Input for Serial Number = * 
 - Input for Reason = *
 
 Afterwards, data that is sent from the hymera will be shown on the screen, refreshed at every second. Please keep this running in the background. 
