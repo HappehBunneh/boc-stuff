@@ -1,3 +1,6 @@
+_In Memory of Stewart Dow who was the best colleague and friend anybody could've asked for_
+
+
 # Hymera Monitoring Station
 ## Dataplicity Usage
 Log in..
